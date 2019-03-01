@@ -14,3 +14,6 @@
   from home.a.b import *  
   前提 home、a中都包括__init__.py  
 
+# BOM标记，文件开头 \ufeff
+***
+utf-8编码产生的csv文件，excel打开报错，使用utf_8_sig带BOM的编码格式就可以正常解码咯。  
