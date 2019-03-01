@@ -17,3 +17,9 @@
 # BOM标记，文件开头 \ufeff
 ***
 utf-8编码产生的csv文件，excel打开乱码，使用utf_8_sig带BOM的编码格式就可以正常解码咯。  
+
+将BOM头去掉，代码如下：
+
+if text.startswith(u'\ufeff'):    
+    text = text.encode('utf8')[3:].decode('utf8')    
+    
