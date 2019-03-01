@@ -37,3 +37,6 @@ csv_readfile = csv.reader((line.replace('\0', '') for line in csv_read))
 # 轮子感悟
 ***
 今后遇到这类问题，应该首先考虑我可以用语言（例如python）的什么模块或者函数去解决这个问题，而不是赶紧就着手自己造轮子去写繁杂的代码，毕竟自己写出来的未必尽善尽美地兼容了。
+
+# GIT撤销修改的不同阶段
+> http://einverne.github.io/post/2017/12/git-reset.html
