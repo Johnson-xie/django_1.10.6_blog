@@ -22,4 +22,7 @@ utf-8编码产生的csv文件，excel打开乱码，使用utf_8_sig带BOM的编�
 
   if text.startswith(u'\ufeff'):    
     text = text.encode('utf8')[3:].decode('utf8')    
-    
+ void main()
+{
+    printf("Hello, Markdown.");
+}
