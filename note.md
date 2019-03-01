@@ -22,7 +22,14 @@ utf-8编码产生的csv文件，excel打开乱码，使用utf_8_sig带BOM的编�
 
   if text.startswith(u'\ufeff'):    
     text = text.encode('utf8')[3:].decode('utf8')    
- void main()
-{
-    printf("Hello, Markdown.");
-}
+# csv文件读取报错
+***
+**_csv.Error: field larger than field limit (131072)**
+头部添加  
+import csv  
+import sys  
+csv.field_size_limit(sys.maxsize)  
+**csv.Error: line contains NULL byte**
+去掉文件中的\0及null字符  
+csv_readfile = csv.reader((line.replace('\0', '') for line in csv_read))  
+传入的是迭代器对象  
