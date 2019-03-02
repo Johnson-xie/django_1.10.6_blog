@@ -40,3 +40,44 @@ csv_readfile = csv.reader((line.replace('\0', '') for line in csv_read))
 
 # GIT撤销修改的不同阶段
 > http://einverne.github.io/post/2017/12/git-reset.html
+
+# pandas处理工资报表简单操作
+***
+#### 读取excel参数
+
+* sheet_name=[0,1,2] 或具体名字
+* index_col="col_label" 取col的label为行索引
+* skiprows=2 跳过前2行，默认开始行即第三行为header的label
+
+
+
+#### 向excel_abspath中插入新的sheet
+**插入新的sheet**
+```  
+import openpyxl import load_workbook
+import panas
+dataframe = pd.DataFrame({col1:[row1,row2,row3],col2:[row1,row2,row3],col3:[row1,row2,row3]})
+excelWriter = pd.ExcelWriter(excel_abspath,engine='openpyxl)
+book = load_workbook(excelEriter.path)
+excelWriter.book = book
+dataframe.to_excel(excel_writer=excelWriter,sheet_name='new_sheet_name',index=None)
+excelWriter.close()
+
+```  
+
+#### 简单行里操作  
+*取指定列的数据
+df[['label1','label2']
+*获取行  
+df.iloc[index]
+* 获取行的指定列值
+df.iloc[index]['col_label']
+* 返回df的元组(行数，列数)
+df.shape 
+#### dataframe拼接  
+df.append(df2)
+
+#### 打包py为exe文件  
+pyinstall -F script_name.py --hidden-import=pandas._libs.tslibs.timedeltas
+
+
