@@ -8,6 +8,5 @@
 ```
 ssh-keygen -t rsa -C "your_email@example.com"
 ```
-### 私有秘钥，本地电脑上
-### 公钥，远端github上
+### 私有秘钥，本地电脑上,公钥，远端github上,通过私钥要来进行认证  
 `id_rsa 文件是私有密钥， id_rsa.pub 是公开密钥`
