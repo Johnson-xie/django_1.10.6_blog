@@ -83,4 +83,15 @@ df.iloc[index]['col_label']
 #### 打包py为exe文件  
 ```pyinstall -F script_name.py --hidden-import=pandas._libs.tslibs.timedeltas```
 
+# notepad++ 常用快捷键
+- ctrl + shift + 上下移动行内容
+- ctrl + g 跳转到指定行
+- ctrl + d 复制黏贴当前行(pycharm ctrl + d)
+- ctrl + l 删除光标所在行(pycharm ctrl + y)
+- shift + home/end(选择光标至头或至尾内容)
+
+| 一个普通标题 | 一个普通标题 | 一个普通标题 |
+| ------ | ------ | ------ |
+| 短文本 | 中等文本 | 稍微长一点的文本 |
+| 稍微长一点的文本 | 短文本 | 中等文本 |
 
