@@ -14,6 +14,8 @@
 `主页显示 最受欢迎的5个分类`
 * view中导入所需模型
 ```from rango.models import Category```
+* 修改index视图  
+
 
 
 
