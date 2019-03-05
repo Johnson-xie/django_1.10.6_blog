@@ -95,7 +95,7 @@ df.iloc[index]['col_label']
 | 短文本 | 中等文本 | 稍微长一点的文本 |
 | 稍微长一点的文本 | 短文本 | 中等文本 |
 
-# python 获取脚本调用执行的模块信息
+# python 获取脚本嵌套调用执行的模块信息
 ```
 import sys
 abspath = '/root/Desktop/hell.py'
