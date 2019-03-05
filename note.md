@@ -98,6 +98,9 @@ df.iloc[index]['col_label']
 # python 获取脚本调用执行的模块信息
 ```
 import sys
+abspath = '/root/Desktop/hell.py'
+sys.path.append(os.path.dirname(abspath))
+import os.path.basename(abspath)
 try:
     sys.module.values().__file__
 except AttributeError as e:
