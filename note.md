@@ -80,6 +80,21 @@ df.iloc[index]['col_label']
 #### dataframe拼接  
 ```df.append(df2)```
 
+## pandas 筛选含某字段的数据
+**拼接df**
+```
+new = [df1,df2,df3,]
+df = pd.concat(new)
+```
+**筛选数据与取反**
+```
+new = df[~df['fpath'].str.contains('open_source|opensource')]  多个字段用|分割，取反不包含使用~
+```
+
+
+
+
+
 #### 打包py为exe文件  
 ```pyinstall -F script_name.py --hidden-import=pandas._libs.tslibs.timedeltas```
 
