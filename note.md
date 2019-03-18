@@ -102,10 +102,75 @@ new = df[~df['fpath'].str.contains('open_source|opensource')]  多个字段用|�
 df = pd.dataframe({'col_field':[1,2,3],'col_field2':['a','b','c']})  
 ```
 
+# pandas  
+
+### read excel  
+**先读出来看一下，再设置索引**
+```
+df = pd.read_excel(path,index_col='col_field')
+```
+
+### 排序
+```  
+products = pd.read_excel('C:/Temp/List.xlsx', index_col='ID')
+products.sort_values(by=['Worthy', 'Price'], ascending=[True, False], inplace=True)
+print(products)  
+
+```
+### 重新设置索引，会生成新的df
+`df = df.set_index('field')`  
+
+### 使用函数处理列数据 或判断
+```
+    
+def validate_age(a):
+    return 18 <= a <= 30
 
 
+def level_b(s):
+    return 60 <= s < 90
 
 
+students = pd.read_excel('C:/Temp/Students.xlsx', index_col='ID')
+students = students.loc[students['Age'].apply(validate_age)].loc[students.Score.apply(level_b)]  # 两种语法
+print(students)  
+```
+
+### 两个表根据索引进行合并 左连接和右连接
+```   
+
+students = pd.read_excel('C:/Temp/Student_score.xlsx', sheet_name='Students', index_col='ID')
+scores = pd.read_excel('C:/Temp/Student_score.xlsx', sheet_name='Scores', index_col='ID')
+table = students.join(scores, how='left').fillna(0)  没有就填充数据  
+table.Score = table.Score.astype(int)  
+
+查看数据格式 table.Score.dtype
+
+
+```
+
+### 数据校验
+```
+def score_valication(row):
+    try:
+        assert 0 <= row.Score <= 100
+    except:
+        print(f'#{row.ID}\tstudent {row.Name} has an invalid score {row.Score}')
+
+
+students = pd.read_excel('C:/Temp/Students.xlsx')
+# print(students)
+students.apply(score_valication, axis=1)  传入的是行对象
+```  
+
+### 处理文本，添加行
+```  
+employees = pd.read_excel('C:/Temp/Employees.xlsx', index_col='ID')
+df = employees['Full Name'].str.split(expand=True)
+employees['First Name'] = df[0]
+employees['Last Name'] = df[1]
+print(employees)  
+```
 
 
 #### 打包py为exe文件  
