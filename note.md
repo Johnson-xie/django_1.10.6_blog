@@ -91,6 +91,12 @@ df = pd.concat(new)
 new = df[~df['fpath'].str.contains('open_source|opensource')]  多个字段用|分割，取反不包含使用~
 ```
 
+## 添加行
+* df['new_field'] = value or Series  
+## 自定义函数处理一列中每行的内容  
+* new_col = df['col_filed'].apply(func)  
+
+
 
 
 
