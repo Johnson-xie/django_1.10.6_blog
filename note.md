@@ -96,6 +96,13 @@ new = df[~df['fpath'].str.contains('open_source|opensource')]  多个字段用|�
 ## 自定义函数处理一列中每行的内容  
 * new_col = df['col_filed'].apply(func)  
 
+# 蔓藤
+## 建文件
+```
+df = pd.dataframe({'col_field':[1,2,3],'col_field2':['a','b','c']})  
+```
+
+
 
 
 
