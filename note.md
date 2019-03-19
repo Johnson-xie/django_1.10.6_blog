@@ -172,6 +172,74 @@ employees['Last Name'] = df[1]
 print(employees)  
 ```
 
+# 行列求和  
+
+```  
+students = pd.read_excel('C:/Temp/Students.xlsx', index_col='ID')
+
+row_sum = students[['Test_1', 'Test_2', 'Test_3']].sum(axis=1)
+row_mean = students[['Test_1', 'Test_2', 'Test_3']].mean(axis=1)
+
+students['Total'] = row_sum
+students['Average'] = row_mean
+
+col_mean = students[['Test_1', 'Test_2', 'Test_3', 'Total', 'Average']].mean()
+col_mean['Name'] = 'Summary'
+students = students.append(col_mean, ignore_index=True)
+print(students)
+```
+
+# loc和iloc的差别  
+```  
+
+* 选取标签为A和C的列，并且选完类型还是dataframe  
+
+df = df.loc[:, ['A', 'C']]
+df = df.iloc[:, [0, 2]]  
+
+* 选取标签为C并且只取前两行，选完类型还是dataframe  
+
+df = df.loc[0:2, ['A', 'C']]  
+df = df.iloc[0:2, [0, 2]]   
+
+* 聪明的朋友已经看出iloc和loc的不同了：loc是根据dataframe的具体标签选取列，而iloc是根据标签所在的位置，从0开始计数。  
+* 第二个示例中的的0:2表示选取第0行到第二行，这里的0:2相当于[0,2）前闭后开，2是不在范围之内的。  
+* 还有一种方式是使用df.icol(i)来选取列，选取完的也不是dataframe而是series，i为该列所在的位置，从0开始计数。  
+```
+* 如果你想要选取某一行的数据。  
+`df.loc[[i]]或者df.iloc[[i]]`
+
+# 去重和找重
+
+```  
+
+dupe = students.duplicated(subset='Name')  
+dupe = dupe[dupe == True]  # dupe = dupe[dupe]  
+print(students.iloc[dupe.index])  
+
+students.drop_duplicates(subset='Name', inplace=True, keep='last') # keep=first  
+print(students)  
+
+```
+
+# 转置  
+```  
+pd.options.display.max_columns = 999  
+videos = pd.read_excel('C:/Temp/Videos.xlsx', index_col='Month')  
+table = videos.transpose()  
+table = videos.T  
+print(table)  
+```
+# 读取csv文本文件  
+```  
+
+students1 = pd.read_csv('C:/Temp/Students.csv', index_col='ID')  
+students2 = pd.read_csv('C:/Temp/Students.tsv', sep='\t', index_col='ID')  
+students3 = pd.read_csv('C:/Temp/Students.txt', sep='|', index_col='ID')  
+
+```
+
+
 
 #### 打包py为exe文件  
 ```pyinstall -F script_name.py --hidden-import=pandas._libs.tslibs.timedeltas```
