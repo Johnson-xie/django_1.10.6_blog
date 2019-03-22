@@ -269,9 +269,23 @@ except AttributeError as e:
 ```
 # git
 
-提交时报错  
+* 提交时报错  
 `git commit -m 'add tools'`  
 `error: pathspec 'tools'' did not match any file(s) known to git`  
 解决  
 `git commit -m "add tools"`  
-**语法上没有问题，总是提交不了，最后发现，在Linux系统中，commit信息使用单引号”包括，我使用的windows系统，信息应该是双引号”“包括**  
+**语法上没有问题，总是提交不了，最后发现，在Linux系统中，commit信息使用单引号”包括，我使用的windows系统，信息应该是双引号”“包括** 
+
+* 本地修改文件未提交至缓存区，复原  
+```  
+git checkout file  单个文件
+git checkout . 全部  
+``` 
+* 取消已经暂存的文件。即，撤销先前"git add"的操作
+`git reset HEAD <file>`
+
+* 从暂存区删除文件  
+`git rm --cached filename`
+`git f --cached filename `  磁盘也删除
+
+
