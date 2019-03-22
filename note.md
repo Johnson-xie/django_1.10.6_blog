@@ -285,7 +285,8 @@ git checkout . 全部
 `git reset HEAD <file>`
 
 * 从暂存区删除文件  
-`git rm --cached filename`
+`git rm --cached filename`  
+
 `git f --cached filename `  磁盘也删除
 
 
