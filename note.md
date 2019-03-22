@@ -267,4 +267,11 @@ try:
 except AttributeError as e:
     pass
 ```
+# git
 
+提交时报错
+`git commit -m 'add tools'`  
+`error: pathspec 'tools'' did not match any file(s) known to git`
+解决
+`git commit -m "add tools"`
+**语法上没有问题，总是提交不了，最后发现，在Linux系统中，commit信息使用单引号”包括，我使用的windows系统，信息应该是双引号”“包括**
