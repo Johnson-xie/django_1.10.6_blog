@@ -288,5 +288,10 @@ git checkout . 全部
 `git rm --cached filename`  
 
 `git f --cached filename `  磁盘也删除
-
+* 未加入缓存区，撤销修改，退回当前提交版本的状态  
+`git checkout .`
+```  
+git reset --hard HEAD
+git reset --hard commit_id
+```
 
