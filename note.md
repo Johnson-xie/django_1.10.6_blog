@@ -97,7 +97,15 @@ new = df[~df['fpath'].str.contains('open_source|opensource')]  多个字段用|�
 * new_col = df['col_filed'].apply(func)  
 
 ## 添加自定义列名
-* names = ("columns_1","columns_2",)
+* names = ("columns_1","columns_2",)  
+## 提取列数据，从新设置索引  
+```  
+df = pd.read_csv(path,names=("path",))
+
+df['py'] = df[df.path.str.endswith('.py')].dropna(axis=1).reset_index().path
+df['sh'] = df[df.path.str.endswith('.sh')].dropna(axis=1).reset_index().path
+df['bat'] = df[df.path.str.endswith('.bat')].dropna(axis=1).reset_index().path
+```
 
 # 蔓藤
 ## 建文件
