@@ -107,6 +107,9 @@ df['sh'] = df[df.path.str.endswith('.sh')].dropna(axis=1).reset_index().path
 df['bat'] = df[df.path.str.endswith('.bat')].dropna(axis=1).reset_index().path
 ```
 
+## 计算各列非空数据总数  
+`df.count()`
+
 # 蔓藤
 ## 建文件
 ```
