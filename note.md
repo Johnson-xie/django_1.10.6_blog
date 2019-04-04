@@ -58,7 +58,7 @@ csv_readfile = csv.reader((line.replace('\0', '') for line in csv_read))
 **插入新的sheet**
 ```  
 import openpyxl import load_workbook
-import panas
+import pandas as pd  
 dataframe = pd.DataFrame({col1:[row1,row2,row3],col2:[row1,row2,row3],col3:[row1,row2,row3]})
 excelWriter = pd.ExcelWriter(excel_abspath,engine='openpyxl)
 book = load_workbook(excelEriter.path)
