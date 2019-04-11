@@ -308,6 +308,30 @@ git checkout . 全部
 git reset --hard HEAD
 git reset --hard commit_id
 ```  
+# git 多人开发  
+* 切换分支前或fetch等操作前，确保当前分支已提交，无其他修改，是干净的
+* 获取他人新推的分支  
+1.更新远端分支 `git fetch origin`  
+2.显示远端分支 `git branch -r（-a）`  
+3.拉取新的分支到本地 `git checkout -b new_local_branch_name origin/remote_new_branch_name`  
+4.推送分支上去，并且默认该本地分支的上游 `git push -u origin remote_branch_name`  
+* 本地压缩无用提交的commit号 `git rebase -i HEAD~2` (压缩包含当前commit号的2个commit,将压缩号的pick改为fixup,一般第一个不改)  
+* 查看当前git全局配置  
+`git config --global --list `
+*结果*
+```
+	user.name=xieqiang
+	user.email=xieqiang6@huawei.com
+	core.autocrlf=true
+	core.quotepath=false
+	i18n.commitencoding=utf-8
+	i18n.logoutputencoding=gbk
+	gui.encoding=utf-8
+	i18n.commit.encoding=utf-8
+```
+
+
+
 # timeit  
 ```  
 
