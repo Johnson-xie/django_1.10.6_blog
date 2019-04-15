@@ -125,7 +125,8 @@ def get_upload_path(instance, filename):
 
 class User(AbstractUser):
     avatar = models.ImageField(blank=True, upload_to=get_upload_path)
-```
+```  
+
 
 
 
