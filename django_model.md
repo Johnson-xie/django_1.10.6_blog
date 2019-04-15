@@ -70,3 +70,79 @@ class Article(models.Model):
 # 13.Why do you need an extra .all()?  
 Using ORM, do not add an extra method call all before filter(), count(), etc.  
 
+# 14.Many flags in a model?  
+If it is justified, replace several BooleanFields with one field, status-like. e.g.  
+```  
+class Article(models.Model):
+    is_published = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    …
+```
+Assume the logic of our application presupposes that the article is not published and checked initially, then it is checked and marked is_verified in True and then it is published. You can notice that article cannot be published without being checked. So there are 3 conditions in total, but with 2 boolean fields we do not have 4 possible variants, and you should make sure there are no articles with wrong boolean fields conditions combinations. That is why using one status field instead of two boolean fields is a better option: 
+```  
+class Article(models.Model):
+    STATUSES = Choices('new', 'verified', 'published')
+
+    status = models.IntegerField(choices=STATUSES, default=STATUSES.draft)
+    …
+```  
+This example may not be very illustrative, but imagine that you have 3 or more such boolean fields in your model, and validation control for these field value combinations can be really tiresome.  
+
+# 15.Redundant model name in a field name  
+Do not add model names to fields if there is no need to do so, e.g. if table User has a field user_status - you should rename the field into status, as long as there are no other statuses in this model.  
+
+# 16. Dirty data should not be found in a base  
+Always use PositiveIntegerField instead of IntegerField if it is not senseless, because “bad” data must not go to the base. For the same reason you should always use unique,unique_together for logically unique data and never use required=False in every field.  
+
+# 17. Getting the earliest/latest object  
+You can use ModelName.objects.earliest('created'/'earliest') instead of order_by('created')[0] and you can also put get_latest_by in Meta model. You should keep in mind that latest/earliest as well as get can cause an exception DoesNotExist. Therefore, order_by('created').first() is the most useful variant.  
+
+# 18. Never make len(queryset)  
+Do not use len to get queryset’s objects amount. The count method can be used for this purpose. Like this: len(ModelName.objects.all()), firstly the query for selecting all data from the table will be carried out, then this data will be transformed into a Python object, and the length of this object will be found with the help of len. It is highly recommended not to use this method as count will address to a corresponding SQL function COUNT(). With count, an easier query will be carried out in that database and fewer resources will be required for python code performance.  
+
+# 19. if queryset is a bad idea  
+Do not use queryset as a boolean value: instead of if queryset: do something use if queryset.exists(): do something. Remember, that querysets are lazy, and if you use queryset as a boolean value, an inappropriate query to a database will be carried out.  
+
+# 20. Using help_text as documentation  
+Using model help_text in fields as a part of documentation will definitely facilitate the understanding of the data structure by you, your colleagues, and admin users.  
+
+# 21. Money Information Storage  
+Do not use FloatField to store information about the quantity of money. Instead, use DecimalField for this purpose. You can also keep this information in cents, units, etc.  
+
+# 22. Remove _id  
+Do not add _id suffix to ForeignKeyField and OneToOneField.  
+
+# 23. Define __unicode__ or __str__  
+In all non abstract models, add methods __unicode__(python 2) or __str__(python 3). These methods must always return strings.  
+
+# 24. Transparent fields list  
+Do not use Meta.exclude for a model’s fields list description in ModelForm. It is better to use Meta.fields for this as it makes the fields list transparent. Do not use Meta.fields=”__all__” for the same reason.  
+
+# 25. Do not heap all files loaded by user in the same folder  
+Sometimes even a separate folder for each FileField will not be enough if a large amount of downloaded files is expected. Storing many files in one folder means the file system will search for the needed file more slowly. To avoid such problems, you can do the following: ```  
+def get_upload_path(instance, filename):
+    return os.path.join('account/avatars/', now().date().strftime("%Y/%m/%d"), filename)
+
+class User(AbstractUser):
+    avatar = models.ImageField(blank=True, upload_to=get_upload_path)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
