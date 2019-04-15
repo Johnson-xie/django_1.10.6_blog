@@ -119,7 +119,8 @@ In all non abstract models, add methods __unicode__(python 2) or __str__(python 
 Do not use Meta.exclude for a model’s fields list description in ModelForm. It is better to use Meta.fields for this as it makes the fields list transparent. Do not use Meta.fields=”__all__” for the same reason.  
 
 # 25. Do not heap all files loaded by user in the same folder  
-Sometimes even a separate folder for each FileField will not be enough if a large amount of downloaded files is expected. Storing many files in one folder means the file system will search for the needed file more slowly. To avoid such problems, you can do the following: ```  
+Sometimes even a separate folder for each FileField will not be enough if a large amount of downloaded files is expected. Storing many files in one folder means the file system will search for the needed file more slowly. To avoid such problems, you can do the following:  
+```  
 def get_upload_path(instance, filename):
     return os.path.join('account/avatars/', now().date().strftime("%Y/%m/%d"), filename)
 
