@@ -43,4 +43,30 @@ Do not use null=True or blank=True for BooleanField. It should also be pointed o
 # 9.Business Logic in Models  
 The best place to allocate business logic for your project is in models, namely method models and model manager. It is possible that method models can only provoke some methods/functions. If it is inconvenient or impossible to allocate logic in models, you need to replace its forms or serializers in tasks.  
 
-# 10.
+# 10.Field Duplication in ModelForm  
+Do not duplicate model fields in ModelForm or ModelSerializer without need. If you want to specify that the form uses all model fields, use MetaFields. If you need to redefine a widget for a field with nothing else to be changed in this field, make use of Meta widgets to indicate widgets.  
+
+# 11.Do not use ObjectDoesNotExist  
+Using ModelName.DoesNotExist instead of ObjectDoesNotExist makes your exception intercepting more specialised, which is a positive practice.  
+
+# 12.Use of choices  
+While using choices, it is recommended to:  
+* keep strings instead of numbers in the database (although this is not the best option from the point of optional database use, it is more convenient in practise as strings are more demonstrable, which allows the use of clear filters with get options from the box in REST frameworks).
+* variables for variants storage are constants. That is why they must be indicated in uppercase.
+* indicate the variants before the fields lists.
+* if it is a list of the statuses, indicate it in chronological order (e.g. new, in_progress, completed).
+* you can use Choices from the model_utils library. Take model Article, for instance:  
+```  
+from model_utils import Choices
+
+class Article(models.Model):
+    STATUSES = Choices(
+        (0, 'draft', _('draft')),
+        (1, 'published', _('published'))   )
+    status = models.IntegerField(choices=STATUSES, default=STATUSES.draft)
+    …
+```
+
+# 13.Why do you need an extra .all()?  
+Using ORM, do not add an extra method call all before filter(), count(), etc.  
+
