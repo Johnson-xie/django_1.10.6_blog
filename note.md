@@ -329,7 +329,20 @@ git reset --hard commit_id
 	gui.encoding=utf-8
 	i18n.commit.encoding=utf-8
 ```
+## git暂时离开未提交修改的分支  
+1.使用git stash保存当前进度分支，`git stash save "暂存mesage"`  
 
+2.使用git stash pop恢复进度,`git stash pop 恢复工作进度`  
+
+## git branch操作  
+* 删除本地分支 git branch -d <BranchName>  
+* 修改本地分支名 git branch -m old new  
+* 创建修改分支  git checkout -b branch_name  
+	
+## 查看版本差别  
+* 当前修改与上一个版本差别 git diff file_or_direct  
+* git diff --cached file_or_direct  
+* git diff HEAD file_or_direct
 
 
 # timeit  
