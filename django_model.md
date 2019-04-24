@@ -128,7 +128,8 @@ class User(AbstractUser):
     avatar = models.ImageField(blank=True, upload_to=get_upload_path)
 ```  
 
-
+## take care
+* django orm 查询先在shell中试，orm执行的原生语句返回字段中必须含主键id
 
 
 
