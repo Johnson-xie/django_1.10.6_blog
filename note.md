@@ -344,6 +344,15 @@ git reset --hard commit_id
 * git diff --cached file_or_direct  
 * git diff HEAD file_or_direct
 
+## 查看单个文件在不同版之间的差异  
+`git diff commit_id1 commit_id2 file_name`
+
+## 单个文件回退版本  
+```  
+git checkout commit_id file_name  
+git commit -m "file_name back to commit_id"
+```
+
 
 # timeit  
 ```  
