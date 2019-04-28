@@ -375,7 +375,10 @@ pip freeze
 * 根据导出的包表安装包  
 `pip install -r project_name/requirements.txt`
 
-
+# python2 或 python3装包错误解决  
+* pip install package_name  
+* pythonn setup.py install (下的python包)  
+* pip install *.whl (下的轮子包)
 
 
 
