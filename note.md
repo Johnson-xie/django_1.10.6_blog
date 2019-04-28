@@ -367,6 +367,13 @@ t.timeit.Timer("func","from __main__ import func")
 t.timeit(10次)  
 ```  
 
+# pip 打包当前环境依赖包  
+* 导出当前包名
+```  
+pip freeze
+```  
+* 根据导出的包表安装包  
+`pip install -r project_name/requirements.txt`
 
 
 
