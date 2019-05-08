@@ -351,6 +351,10 @@ git reset --hard commit_id
 ```  
 git checkout commit_id file_name  
 git commit -m "file_name back to commit_id"
+```  
+## git回到之前版本  
+```
+git checkout -
 ```
 
 
@@ -380,7 +384,12 @@ pip freeze
 * pythonn setup.py install (下的python包)  
 * pip install *.whl (下的轮子包)
 
-
+# 转化时间字符串  
+```  
+u'2017-07-12T11:44:42.000+08:00'
+t = time.strptime(s, '%Y-%m-%dT%H:%M:%S.000+08:00')
+d = datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
+```  
 
 
 
