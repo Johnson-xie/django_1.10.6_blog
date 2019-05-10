@@ -9,6 +9,17 @@ from table
 where field=""
 limit 2,2;  
 ```  
+* 从offset num后开始取  
+```  
+select *  
+from table  
+where conditions  
+order by field_one desc,field_two asc
+limit 5 offset 5;  
+```
+
+
+
 * 查询某字段中有某字符  
 ```  
 select *  
