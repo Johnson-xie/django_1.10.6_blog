@@ -356,7 +356,12 @@ git commit -m "file_name back to commit_id"
 ```
 git checkout -
 ```
-
+## git查看自己的配置  
+```  
+git config --system --list  
+git config --global --list
+git config --local --list
+```
 
 # timeit  
 ```  
