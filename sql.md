@@ -17,6 +17,7 @@ where conditions
 order by field_one desc,field_two asc
 limit 5 offset 5;  
 ```
+**limit 2,1**  等价于   **limit 1 offset 2**  
 ### 根据时间查询的sql
 ```  
 -- 今天    
