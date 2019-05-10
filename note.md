@@ -363,6 +363,18 @@ git config --global --list
 git config --local --list
 ```
 
+## git覆盖上一条commit信息  
+`git commit --amend --no-edit`
+* 覆盖上一条记录,没有commit信息  
+
+* 远程仓库回退  
+```  
+1.本地git log --oneline
+2.git reset --hard commit_id
+3.git push -f 推送回退的版本，远端即回退
+```
+
+
 # timeit  
 ```  
 
