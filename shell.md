@@ -14,3 +14,15 @@ line=`sed -n 18p file_path`
 sed -i "s/^profile.*dev[\'\"]$/# profile = 'dev'/g" /Web/CIweb/mysite/mysite/settings.py
 sed -i "s/^#.*profile.*prod[\'\"]$/profile = 'pro'/g" /Web/CIweb/mysite/mysite/settings.py
 ```
+## 正则搜索文件中的行  
+* -a && and -o or ||
+```  
+dev=`sed -n "/^profile.*dev[\'\"]$/p" /c/Users/xwx620452/Desktop/settings.py`
+prod=`sed -n "/^#.*profile.*prod[\'\"]$/p" /c/Users/xwx620452/Desktop/settings.py`
+if [ "$dev" != "" -a "$prod" != "" ];then 
+	echo "settings.py 线上环境有改动,请检查后启动"
+	echo "$dev"
+	echo "$prod"
+	exit
+fi
+```
