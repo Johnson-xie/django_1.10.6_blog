@@ -26,3 +26,15 @@ if [ "$dev" != "" -a "$prod" != "" ];then
 	exit
 fi
 ```
+
+## 正则匹配使用  
+```  
+line=`sed -n 18p /c/Users/xwx620452/Desktop/settings.py`
+reg="^#.*profile.*prod[\'\"]$"
+
+if [[ "$line" =~ $reg ]];then 
+	echo "settings.py 线上环境已修改,请检查后启动"
+	exit
+fi
+
+```
