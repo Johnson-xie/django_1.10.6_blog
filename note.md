@@ -373,7 +373,12 @@ git config --local --list
 2.git reset --hard commit_id
 3.git push -f 推送回退的版本，远端即回退
 ```
-
+# git 撤销文件工作区，或缓存区  
+```  
+通过 git checkout 文件名 命令可以撤销文件在工作区的修改。 
+通过 git reset 文件名 命令可以撤销指定文件的 git add 操作，即这个文件在暂存区的修改。 
+通过 git reset 命令可以撤销之前的所有 git add 操作，即在暂存区的修改。
+```
 
 # timeit  
 ```  
