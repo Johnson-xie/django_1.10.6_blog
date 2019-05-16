@@ -1,6 +1,6 @@
 # python module  
-[bisect](http://kuanghy.github.io/2016/06/14/python-bisect)
-## python bisect
+
+## [python bisect](http://kuanghy.github.io/2016/06/14/python-bisect)
 ```  
 def binary_search_recursion(lst, value, low, high):
     if high < low:
