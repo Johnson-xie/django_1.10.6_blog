@@ -77,4 +77,30 @@ order by time_field desc;
 delete from table 
 where time_field > "2019-04-01 00:00:00";
 ```
+
+## mysql 如何用一个表的字段填充另一个表  
+* 连表查询，将code_base_update_record中的last_revision字段填充到code_base_info里的last_revision字段中
+```  
+UPDATE code_base_info 
+INNER JOIN `code_base_update_record`
+ON code_base_info.id=code_base_update_record.code_base_id
+SET code_base_info.last_revision=code_base_update_record.last_revision;  
+```
  
+ ## 获取表中分组后各组最新的一条数据
+ ```  
+ select *
+from
+(SELECT *
+FROM `code_base_update_record`
+order by `update_time` desc) as tb1
+group by tb1.code_base_id
+order by tb1.`update_time` desc;  
+```  
+
+# 根据字段长度查询  
+```  
+update `code_base_info` 
+set last_revision=''
+where length(last_revision)<=8;
+```
