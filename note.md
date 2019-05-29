@@ -392,6 +392,16 @@ git diff HEAD~2 查看HEAD和之前第二个commit的不同点
 * 推送  
 `git push origin remote_branch_name`
 
+## git amend  
+* 覆盖上一条commit  
+`git commit --amend --no-edit`  
+* add commit  
+`git commit --am "information"`  
+
+## 远程仓库回退  
+1.本地git log --oneline
+2.git reset --hard commit_id
+3.git push -f 推送回退的版本，远端即回退
 
 # timeit  
 ```  
