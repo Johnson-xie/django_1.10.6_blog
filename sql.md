@@ -98,9 +98,13 @@ group by tb1.code_base_id
 order by tb1.`update_time` desc;  
 ```  
 
-# 根据字段长度查询  
+## 根据字段长度查询  
 ```  
 update `code_base_info` 
 set last_revision=''
 where length(last_revision)<=8;
 ```
+
+## 计数  
+`select count(*) from tbl`  
+`select count(distinct field) from tbl`
