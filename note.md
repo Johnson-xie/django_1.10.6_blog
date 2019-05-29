@@ -378,7 +378,20 @@ git config --local --list
 通过 git checkout 文件名 命令可以撤销文件在工作区的修改。 
 通过 git reset 文件名 命令可以撤销指定文件的 git add 操作，即这个文件在暂存区的修改。 
 通过 git reset 命令可以撤销之前的所有 git add 操作，即在暂存区的修改。
+```  
+## 查看不同  
+```  
+git diff HEAD 查看工作树与本地库的不同点  
+git diff HEAD~1 查看HEAD和上一个commit的不同点  
+git diff HEAD~2 查看HEAD和之前第二个commit的不同点
 ```
+
+## git log
+* 忽略合并的commit号  
+`git log --no-merges`
+* 推送  
+`git push origin remote_branch_name`
+
 
 # timeit  
 ```  
