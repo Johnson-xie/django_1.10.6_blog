@@ -352,7 +352,7 @@ git reset --hard commit_id
 git checkout commit_id file_name  
 git commit -m "file_name back to commit_id"
 ```  
-## git回到之前版本  
+## git回到之前分支  
 ```
 git checkout -
 ```
