@@ -436,7 +436,42 @@ t = time.strptime(s, '%Y-%m-%dT%H:%M:%S.000+08:00')
 d = datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
 ```  
 
+# 字典列表，根据某个值进行分组  
+```  
+from operator import itemgetter
+from itertools import groupby
+rows = [
+    {'address': '5412 N CLARK', 'date': '07/01/2012'},
+    {'address': '5148 N CLARK', 'date': '07/04/2012'},
+    {'address': '5800 E 58TH', 'date': '07/02/2012'},
+    {'address': '2122 N CLARK', 'date': '07/03/2012'},
+    {'address': '5645 N RAVENSWOOD', 'date': '07/02/2012'},
+    {'address': '1060 W ADDISON', 'date': '07/02/2012'},
+    {'address': '4801 N BROADWAY', 'date': '07/01/2012'},
+    {'address': '1039 W GRANVILLE', 'date': '07/04/2012'},
+]
+#operator模块提供的itemgetter函数用于获取对象的哪些维的数据
+rows.sort(key=itemgetter('date'))
+for date,items in groupby(rows, key=itemgetter('date')):
+    print(date)
+    for i in items:
+        print(' ', i)
+```  
 
+```  
+07/01/2012
+  {'address': '5412 N CLARK', 'date': '07/01/2012'}
+  {'address': '4801 N BROADWAY', 'date': '07/01/2012'}
+07/02/2012
+  {'address': '5800 E 58TH', 'date': '07/02/2012'}
+  {'address': '5645 N RAVENSWOOD', 'date': '07/02/2012'}
+  {'address': '1060 W ADDISON', 'date': '07/02/2012'}
+07/03/2012
+  {'address': '2122 N CLARK', 'date': '07/03/2012'}
+07/04/2012
+  {'address': '5148 N CLARK', 'date': '07/04/2012'}
+  {'address': '1039 W GRANVILLE', 'date': '07/04/2012'}
+```
 
 
 
