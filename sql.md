@@ -108,3 +108,16 @@ where length(last_revision)<=8;
 ## 计数  
 `select count(*) from tbl`  
 `select count(distinct field) from tbl`
+
+# sql关联查询外键字段  
+```  
+sql = "SELECT gb.id, gb.title, gpx.group_name, gb.state, gb.post_time, ur.userid, ur.name_chs " \
+      "FROM `bug` as gb " \
+      "inner join `group_x` as gpx " \
+      "on gb.cur_groupid=gpx.id " \
+      "left join `user` as ur " \
+      "on gb.doer=ur.id  " \
+      "where gb.id in (%s)" \
+      "order by gb.post_time desc;" % ids
+bug_detail = Bug_info.objects.using('bug').raw(sql)
+```
