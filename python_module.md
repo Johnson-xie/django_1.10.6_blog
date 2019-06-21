@@ -85,3 +85,11 @@ while(num<5):
 ## Unix进程间的通信方式  
 
 
+## namedtuple设置默认值  
+```  
+UsrCommitRecord = namedtuple('UsrCommitRecord', ('id email usr codebase code_add code_delete dt_add dt_delete other_add other_delete commit_time commit_notes sub_dir hash'))
+UsrCommitRecord.__new__.__defaults__ = (0, '', '', None, 0, 0, 0, 0, 0, 0, '', '', '', '')
+
+```
+
+
