@@ -92,4 +92,13 @@ UsrCommitRecord.__new__.__defaults__ = (0, '', '', None, 0, 0, 0, 0, 0, 0, '', '
 
 ```
 
+## 获取近一个月的时间  
+```  
+now_time = datetime.datetime.now()
+pre_time = now_time - datetime.timedelta(days=30)
+now_str = now_time.strftime('%Y-%m-%d %H:%M:%S')
+pre_str = pre_time.strftime('%Y-%m-%d %H:%M:%S')
+
+```
+
 
