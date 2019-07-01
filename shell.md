@@ -37,4 +37,16 @@ if [[ "$line" =~ $reg ]];then
 	exit
 fi
 
+```  
+
+## shell调用python,获取python返回值  
+```  
+python中print正常打印到终端，使用sys.exit(0)返回值到shell终端  
+shell 中直接调用python脚本:python script_name.py  
+shell中获取返回值：$?  
+
 ```
+
+
+
+
