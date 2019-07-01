@@ -99,6 +99,12 @@ pre_time = now_time - datetime.timedelta(days=30)
 now_str = now_time.strftime('%Y-%m-%d %H:%M:%S')
 pre_str = pre_time.strftime('%Y-%m-%d %H:%M:%S')
 
+```  
+
+## python 打包exe文件  
+```  
+pip install pyinstaller  
+pyinstaller -F script_name.py
 ```
 
 
