@@ -106,5 +106,7 @@ pre_str = pre_time.strftime('%Y-%m-%d %H:%M:%S')
 pip install pyinstaller  
 pyinstaller -F script_name.py
 ```
+## json.dumps后中文变unicode编码  
+`json.dumps(data, ensure_ascii=False)`  
 
 
