@@ -131,7 +131,28 @@ class User(AbstractUser):
 ## take care
 * django orm 查询先在shell中试，orm执行的原生语句返回字段中必须含主键id
 
+## django保存post提交的数据
 
+* 判断提交方式  
+* 数据库创建表  
+```  
+CREATE TABLE `tbl_perf_monitor_guarder` 
+(id int primary key AUTO_INCREMENT,
+version VARCHAR(255),
+scenes VARCHAR(255),
+guarder VARCHAR(255),
+guarder_id VARCHAR(255),
+remark VARCHAR(255)
+);
+``` 
+* form表单验证然后取值,直接保存到数据库  
+```  
+form = MyForm(request.POST)  
+if form.is_valid():  
+    cd = form.cleaned_data  
+    MyModel.objects.create(**cd)  
+    ...
+```
 
 
 
