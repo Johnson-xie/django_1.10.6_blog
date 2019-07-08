@@ -108,5 +108,6 @@ pyinstaller -F script_name.py
 ```
 ## json.dumps后中文变unicode编码  
 `json.dumps(data, ensure_ascii=False)`  
-* 对象转json字符串后写入文件 `json.dump(data, fp)`
+* 对象转json字符串后写入文件 `json.dump(data, fp)`  
+* 直接将文件对象转为python对象 `json.load(fp)`
 
