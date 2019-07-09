@@ -111,3 +111,31 @@ pyinstaller -F script_name.py
 * 对象转json字符串后写入文件 `json.dump(data, fp)`  
 * 直接将文件对象转为python对象 `json.load(fp)`
 
+## groupby  
+* 自定义分组  
+* 根据第一个元素和第二个元素的组合分组
+```  
+for key, value in groupby(sorted(data_list, key=lambda x: x[1]), key=lambda x: x[0] + " " + x[1]):
+```  
+* 自定函数分组  
+```  
+from itertools import groupby
+lst=[2,8,11,25,43,6,9,29,51,66]
+
+def gb(num):
+    if num <= 10:
+        return 'less'
+    elif num >=30:
+        return 'great'
+    else:
+        return 'middle'
+
+print [(k,list(g))for k,g in groupby(sorted(lst),key=gb)]
+返回：
+[('less', [2, 6, 8, 9]), ('middle', [11, 25, 29]), ('great', [43, 51, 66])]
+```
+
+
+
+
+
