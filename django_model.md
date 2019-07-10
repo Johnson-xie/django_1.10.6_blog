@@ -154,6 +154,10 @@ if form.is_valid():
     ...
 ```
 
+## 错误  
+
+### (1054, "Unknown column 'bug.label' in 'field list'")  
+
 
 
 
