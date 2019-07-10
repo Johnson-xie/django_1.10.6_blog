@@ -157,7 +157,22 @@ if form.is_valid():
 ## 错误  
 
 ### (1054, "Unknown column 'bug.label' in 'field list'")  
+```  
+php段隐藏表单中字段----＜input type="hidden" name="..." value="..."＞ 
 
+解BUG:
+    改后很久出现的错误----(1054, "Unknown column 'bug.label' in 'field list'")
+    删除字段
+    alter table `bug` drop column label; 
+    修改字段
+    alter table `bug` add label varchar(32);
+    去掉模型中的字段后正常了？？
+    项目中其他地方用使用了该模型查询生产库，而生产库没有添加该字段，生产库填完该字段后应该不会报错
+    启动全局搜素找到原因咯
+结论：
+    数据库的模型字段要和数据库字段对应，一旦调用模型时，与数据库不匹配就会报1054错误。
+
+```
 
 
 
