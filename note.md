@@ -253,6 +253,24 @@ students3 = pd.read_csv('C:/Temp/Students.txt', sep='|', index_col='ID')
 
 ```
 
+# pandas读取一个excel文件里的多张表  
+* 已知表名  
+```  
+xls = pd.ExcelFile('path_to_file.xls')
+df1 = pd.read_excel(xls, 'Sheet1')
+df2 = pd.read_excel(xls, 'Sheet2')
+```
+
+* 未知sheet_name待续......
+
+
+
+
+
+
+
+
+
 
 
 #### 打包py为exe文件  
