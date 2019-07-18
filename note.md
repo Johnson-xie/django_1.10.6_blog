@@ -68,6 +68,18 @@ excelWriter.close()
 
 ```  
 
+```  
+def add_sheet(df, name):
+    writer = pd.ExcelWriter(url, engine='openpyxl')
+    book = load_workbook(writer.path)
+    writer.book = book
+    df.to_excel(writer, index=False, sheet_name='not_found' + name)
+    writer.save()
+    writer.close()
+```
+
+
+
 #### 简单行里操作  
 *取指定列的数据
 ```df[['label1','label2']```
