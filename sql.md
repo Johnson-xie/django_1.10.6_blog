@@ -121,3 +121,31 @@ sql = "SELECT gb.id, gb.title, gpx.group_name, gb.state, gb.post_time, ur.userid
       "order by gb.post_time desc;" % ids
 bug_detail = Bug_info.objects.using('bug').raw(sql)
 ```
+
+## 查询到的一张表的值作为另一张表的查询条件获取更改条件  
+* 使用其他表中查到的值必须使用inner join  
+* inner join可以没有on的条件  
+* 必要时内联多张表，分别使用各自属性值
+```  
+update tbl_domain as td 
+inner join (select id from tbl_user where user_id="q00391896") as new 
+inner join (select td.id from tbl_group as tg inner join tbl_domain as td on tg.id=td.group_id where tg.`name`='产品二部 基站公共' and td.`name`='L2_MDE') as new2 
+set td.pl=new.id 
+where td.id=new2.id;
+```  
+
+* sql中各属性不用分号，入关与关键字冲突，可以使用反引号或不用  
+```  
+INSERT INTO `tbl_user`(`user_id`, `role`, `name_chs`, `name_eng`, `email_address`, `mobile_number`,`login_number`, `group`, `domain_id`, `is_superuser`, `username`, `is_staff`, `is_active`)
+VALUES('123456', 'guest', 'johnson', 'chenziwei', 'johnson@163.com', '13438490248', 0, 41, 179, 0, 'xwx1452', 0, 1)
+```  
+* 刷数据库时，先使用硬编码sql语句，开刷后使用for循环模板语法替换
+
+
+
+
+
+
+
+
+
