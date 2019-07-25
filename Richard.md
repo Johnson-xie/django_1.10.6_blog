@@ -213,6 +213,79 @@ pylint 113次扫描  http://100.106.248.198:3000/projects/web_uci_project/builds
 1.认领pylint；
 2.基础性能防线；
 
+2019-07-23
+
+建立一个关联表作为说明
+create table `bug_state`(
+state_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+state VARCHAR(10)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;  # 建表也要指定编码方式
+
+insert into `bug_state`(state_id,state) values 
+(0, "未同步提单"),
+(1, "已同步提单"),
+(2, "非问题");
+
+1.建表
+2.插入数据
+3.修改原有表的外键关联
+
+alter table bug_trace add constraint `sync_dts` foreign key (`sync_dts`) REFERENCES `dts_state` (`state_id`);
+desc bug_trace;
+
+django模板语言注释掉不管用，删除花括号
+git log获取相关信息
+f'git log  --no-merges --format="%nemail=%ae%nuser=%an%ncommit_time=%ai%nhash=%H"  --numstat --since="{pre_str}" --until="{now_str}"'
+
+pycharm 三个快捷键， 
+第一个格式化： ctrl + alt + L, 
+第二个，规整引入： ctrl +alt +o,crl+alt+i
+
+
+问题：撤销暂存区的修改
+
+git commit -am "合并提交"
+解决冲突后，直接git add file就如库了
+
+git stash clear清空stash
+
+创建生产库的表tbl_perf_monitor_guarder
+
+git stash apply number 
+stash不会删除掉
+
+2019-07-23
+1.展示方式，是否需要跳转；
+2.清楚多余的修改，包括权限和跳转击鼓传花url；
+3.扩展到roll release
+
+2019-07-24
+1.ci模块下，持续交付，版本信息；
+2.脚本刷新抓取的是bug表的信息，所以查取的是bug表模型；
+
+beyond compare快速复制
+
+
+2019-07-25
+1.发布版中的富文本编辑器
+2.确定发布版需要问题添加框否；
+3.复习已做的前端，总结；
+
+git diff HEAD~1 当前的(包括没有提交的)   和上一次commit对比(最新的第二个commit)
+git 多次fix
+git 本地回退
+git push -f
+修改后重新push
+
+django 模板注释
+单行注释：
+使用 {#  #} 单行注释，例如:
+{# Everything you see here is a comment. It won't show up in the HTML output. #}
+多行注释：
+{% comment %} this is a comment {% endcomment %}
+
+
+
 
 
 
