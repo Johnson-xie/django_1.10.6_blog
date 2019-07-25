@@ -265,13 +265,9 @@ stash不会删除掉
 
 beyond compare快速复制
 
-
 2019-07-25
-1.发布版中的富文本编辑器
-2.确定发布版需要问题添加框否；
-3.复习已做的前端，总结；
-
 git diff HEAD~1 当前的(包括没有提交的)   和上一次commit对比(最新的第二个commit)
+git diff HEAD  当前修改未提交  与已修改提交最新的commit对比
 git 多次fix
 git 本地回退
 git push -f
@@ -283,6 +279,100 @@ django 模板注释
 {# Everything you see here is a comment. It won't show up in the HTML output. #}
 多行注释：
 {% comment %} this is a comment {% endcomment %}
+
+查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）:
+git branch -vv
+查看当前远程仓库信息
+git remote -vv
+需求分支放太久，就git pull origin master一下
+
+前端减掉原有属性的作用
+herf="javascript:void(0)"
+action="javascript:void(0)"
+
+single同步提单需求步骤
+1.查看同步提单到数据库的数据；
+2.击鼓传花提交的字段信息；
+3.脚本刷击鼓传花表时刷了哪些数据到dts数据单；
+4.绕过击鼓传花表单；
+
+问了杨萍接口，所有问题就解决咯
+
+js 三目运算
+
+api 中接口api/dts/dts_lading/
+
+已下情况的提交方式是怎么提交的ajax
+req = json.loads(request.body)
+
+选择图标的本地文件服务器
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/dts/dts_lading/',
+            headers:{'Content-Type':"application/json"},
+            dataType: 'json',
+            data: {
+                'type_name': type_name,
+                'version_c':version_c,
+                'version_b': version_b,
+                'severity_level':severity_level,
+                'desc_brief':desc_brief,
+                'desc_detail':desc_detail,
+                'creator': creator,
+                'next_handler':next_handler,
+                'detail_version_id':detail_version_id,
+                'label':label
+            },
+        });
+
+ajax发送请求到post接收
+
+request.body接收到的是字节
+var formdata = {
+                    'type_name': type_name,
+                    'version_c':version_c,
+                    'version_b': version_b,
+                    'severity_level':severity_level,
+                    'desc_brief':desc_brief,
+                    'desc_detail':desc_detail,
+                    'creator': creator,
+                    'next_handler':next_handler,
+                    'detail_version_id':detail_version_id,
+                    'label':label
+                };
+        $.ajax({
+            type: 'POST',
+            url: '/api/dts/dts_lading/',
+            headers:{
+                'Content-Type': 'application/json',
+                'contentType': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            dataType: 'json',
+            data: JSON.stringify(formdata),
+            
+            async: true,
+            success: function(data) {
+                if (data.statue === 'ok') {
+                    mtsAlert(data.msg);
+                    window.location.href = '/ci/daily/{{version.version_alias}}';
+                } else {
+                    mtsAlert(data.msg);
+                }
+                $('#prorele_weekl_btn').removeAttr("disabled");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $('#prorele_weekl_btn').removeAttr("disabled");
+            }
+        });
+
+2019-07-26
+1.必填字段前端进行验证
+2.提交的数据和杨萍确认；
+3.修改ajax提交方式
+4.约束版本C
+
+
+
 
 
 
