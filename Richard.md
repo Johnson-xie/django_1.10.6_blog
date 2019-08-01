@@ -371,6 +371,166 @@ var formdata = {
 3.修改ajax提交方式
 4.约束版本C
 
+python console 右键清屏
+struct学习
+
+form表单button type='button'不会提交表单
+
+INSERT INTO `webtest`.`tbl_dts_version` (`version_c`) VALUES 
+('5G RAN V100R002C10'),
+('5G RAN V100R003C00'),
+('5G RAN V100R002C11');
+
+create table tbl_dts_version (
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+version_c VARCHAR(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+暂时先写死了
+之前的label来自bug
+dts_label_list = Bug_info.objects.using('db_bug_trace').filter(bug_label__in=label_list, bug_sync_dts=1).values_list('bug_label', flat=True)
+
+
+前端总结
+
+周一 提单
+
+2019-07-28
+性能防线场景下拉框优化
+dts_id  dts  中type_id和label的关系
+
+
+2019-07-27
+信息比对
+1.版本名 比对
+2.license 比对
+3.新增 比对 记录
+4.新增 加文档
+
+多人开发一个分支，经常性拉取最新，更新本地到最新再推；
+
+
+git pull更新代码后
+git diff HEAD~1  查看更新详情
+
+问题perssion是什么时候渲染的？？？
+
+
+2019-07-29
+基础性能防线，增加相关人员权限，修改列表
+提醒菡阁提单操作流程
+
+
+
+
+2019-07-29
+
+提单步骤：
+1.check_lading...关闭
+2.dts_action打开，运行脚本
+3.检查
+    动态检查 一行一个单
+    codex
+    安全编码 静态  动态
+4.check_lading打开提单
+
+阅读书籍的时候，读完一章再回过头重新看一下这一章，第一遍可以多敲代码
+
+
+模型类中User的groups字段直接对应的就是tbl_user_groups的身份表
+session提取用户信息
+
+user_id = request.session.get("user_id", "anonymous")
+maintainers = User.objects.filter(groups=13).values_list('user_id', flat=True)
+
+指定单个文件，查看不同点
+git diff HEAD~1 perf_monitor/views.py
+
+2019-07-30
+解决冲突后，拉取最新主干分支到当前分支
+解决冲突，
+<<<<<<<<<<<<
+自己写的内容
+===========
+别人写的内容
+>>>>>>>>>>
+修改后add
+然后commit
+push 
+
+raw(select * from myapp_model默认表名)
+log.info内容的站位符，后面全部用逗号隔开入参就可以
+log.info('%s,%s',var1,var2)
+
+2019-07-31
+
+多对多表的查询
+SELECT tu.user_id,tu.name_chs,tug.group_id
+from tbl_user as tu, tbl_user_groups as tug
+where tu.id=tug.user_id 
+and tug.group_id=13;
+
+关注dts单流程与页面展示接口
+
+脚本刷数据
+drumming_flower()  bug---->tbl_dts
+
+脚本刷数据，5分钟跑一下
+check_lading()     tbl_dts----->提单返回状态和DTS单号
+
+
+调接口数据直接到tbl_dts单   ---- /api/dts/dts_lading/
+接口并没有type_id这个字段
+    击鼓传花该字段为bug的主键id字段；
+
+web dts展示界面接口  ---/dts  获取tbl_dts数据表并展示数据
+
+哪些是运维用户？
+
+codeclub接口
+
+一秒一次
+从来没有统计过的库比较多commit信息
+
+
+HSHfzhx4KWMx2xanPm_c
+个人Token查询
+http://code.huawei.com/profile/personal_access_tokens
+
+1.获取merge信息
+http://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/merge_requests/?target_branch=master&state=merged&order_by=updated_at&sort=desc&more_info=True
+
+2.根据merge信息获取commit信息
+http://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/merge_requests/2325618/commits?page=1&per_page=5
+
+3.commit id 获取详情信息
+http://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/repository/commits/d4cc3291978896e1e9ed91442a7e3921050d57de
+
+原条件
+
+2019-08-01
+http://code.huawei.com/api/v3/contributions/projects/18193?private_token=PRIVATETOKEN&start_time=2016-12-01%2000:00:00%20+0800&end_time=2016-12-07%2023:59:59%20+0800
+
+返回最新的commits信息
+http://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/repository/commits/?more_info=true
+
+post将下载json存为json文件
+
+with open(r"C:\Users\xwx620452\Desktop\response.json", 'r', encoding='utf-8') as f:
+    d = json.load(f)
+from pprint import pprint
+pprint(d)
+len(d)    
+
+url = "http://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/repository/commits/"
+headers = {"PRIVATE-TOKEN": "HSHfzhx4KWMx2xanPm_c", "more_info": "true", 'page': '1', 'per_page': '4000'}
+ret = requests.get(url, headers=headers)
+
+https 拉代码前设置全局
+git config --global http.sslVerify false
+遇到错误就谷歌
+
+
 
 
 
