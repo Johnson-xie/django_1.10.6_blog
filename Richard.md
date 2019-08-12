@@ -530,6 +530,225 @@ https 拉代码前设置全局
 git config --global http.sslVerify false
 遇到错误就谷歌
 
+2019-08-02
+checkin工具交付
+
+checkin相关维护，问题定位
+
+基础性能防线优化
+权限表维护检查
+查看指定节点后的log日志，格式化输出
+git log 90b4afe865066f04dc44f4ae2203dadf9e43d721..HEAD  --no-merges --format="%nemail=%ae%nuser=%an%ncommit_time=%ai%ncommit_info=%s%nhash=%H"  --numstat
+git log 955cf85b1ea9319f0c2eedba9e182c09ffaed858..HEAD  --no-merges --format="%nemail=%ae%nuser=%an%ncommit_time=%ai%ncommit_info=%s%nhash=%H"  --numstat
+查看库下日志，格式化
+git log --no-merges --format="%nemail=%ae%nuser=%an%ncommit_time=%ai%ncommit_info=%s%nhash=%H"  --numstat
+git 获取日志信息的办法
+
+1. codeclub 获取整个commits信息 hash_key: {}
+2. mysql获取已提交信息 {hash_key}
+3. git log根据code_base_info last_revision获取没有上库的hash_key
+4. 根据3中未上库的信息，查找user_id，组装大的sql语句
+5. 一次性插入库
+
+
+mysql备份数据库表
+create table user_commit_record_copy_xq as select * from usr_commit_record;
+原表3148条
+DELETE FROM usr_commit_record WHERE code_base_id=44;
+
+
+zip(*values)
+
+2019-08-05
+一张表里的数据不在另一张表里，确定一下，多数据的在前面
+select  *  
+from  user_commit_record_copy_xq AS xq  
+where xq.code_base_id=44
+and xq.hash_key  NOT IN(select  usr_commit_record.hash_key  from usr_commit_record  where code_base_id=44);
+
+
+导出excel表
+1.sql语句；
+2.导出excel;
+3.pandas对比；
+
+SELECT tu.user_id, tu.name_chs, tg.`name`, td.`name`
+FROM `tbl_user` as tu,tbl_group as tg, tbl_domain as td
+where tu.`group`=tg.id
+and tg.id=td.group_id
+and tu.domain_id=td.id
+and tu.`group`=35;
+
+
+后台提单接口先接收，前台可以使用页面表单或ajax发起请求；
+
+2019-08-05
+
+多选插件 是一个对象
+部署新工具，推包
+
+2019-08-06
+checkin工具优化转测邮件
+
+
+制作表单
+涉及数据库
+
+
+弹出框中插入input标签，场景在数据库中获取；
+数据库行场景固定，其他行可以自行编辑；
+
+创建外键表
+create table `tbl_perf_guarder`(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+version VARCHAR(10),
+scenes_id int,
+guarder varchar(10),
+remark VARCHAR(255),
+foreign key(scenes_id) references tbl_perf_scene(id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+select tpg.id, tpg.version, tpg.remark, tps.scene_name, tu.user_id, tu.name_chs 
+from tbl_perf_guarder as tpg inner join tbl_perf_scene as tps on tpg.scenes_id=tps.id 
+left join tbl_user as tu on tpg.guarder=tu.user_id 
+where tpg.version="20A" 
+order by tps.scene_name;
+
+'id', 'remark', 'scene_name',  'user_id', 'version', 'name_chs'
+模态框中的表格二次打开宽度变化，表格中宽度写死就没有变化了
+{'data': 'version',
+    'render': function (data, type, row, meta) {
+        return '<input id="' + row.id + '_version' + '" style="width:40px;" value="' + data + '" readonly>';
+    }
+},
+
+模态框高度调整https://blog.csdn.net/u014326004/article/details/69789187
+<div class="modal fade" id="tb_guarder" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:980px;height:900px">
+        <div class="modal-content">
+
+从session取值
+# user_id = request.session.get("user_id", "anonymous")
+# person = User.objects.get(user_id=user_id)
+
+'initComplete': function (settings){
+                $('.select_user').autocomplete({
+                source: users
+                });
+            }
+
+.ui-autocomplete {
+    z-index: 1050;
+    max-height: 320px;
+    overflow : auto;
+}
+
+模态框提示在下面，调整到上面
+
+2019-08-07
+
+select tps.id, tps.scene_name, tu.user_id, tu.name_chs from tbl_perf_guarder as tpg, tbl_perf_scene as tps ,tbl_user as tu where tpg.scenes_id=tps.id and tu.user_id = tpg.user_id and tpg.version='20A';
+
+select distinct tpt.scene_name, tpt.id, tu.user_id, tu.name_chs from tbl_perf_scene as tpt left join tbl_perf_target as tps on tps.scene_id=tpt.id left join tbl_perf_guarder as tpg on tpt.id=tpg.scenes_id left join tbl_user as tu on tu.user_id=tpg.user_id where tps.display=1 and tps.version =22 and tpg.version='20A' order by tps.id;
+
+select tps.scene_name, tps.scene_desc, tpt.id, tpt.target_name, tpt.lower_limit, tpt.upper_limit, tpt.name_related
+from tbl_perf_target tpt
+join tbl_perf_scene tps on tpt.scene_id=tps.id
+where tpt.display=1 and tpt.version = 22
+order by tps.id asc,tpt.id asc;
+
+
+select tps.scene_name, tps.scene_desc, tpt.id, tpt.target_name, tpt.lower_limit, tpt.upper_limit, tpt.name_related, tu.user_id, tu.name_chs from tbl_perf_target as tpt join tbl_perf_scene as tps on tpt.scene_id=tps.id left join tbl_perf_guarder as tpg on tps.id=tpg.scenes_id left join tbl_user as tu on tu.user_id=tpg.user_id where tpt.display=1 and tpt.version=22 and tpg.version='20A' order by tps.id asc,tpt.id asc;
+
+subprocess.Popen(cmd)输出编码问题
+>>> import locale
+>>> locale.getdefaultlocale()
+('zh_CN', 'cp936')
+
+import locale
+cmd = cmd.encode(locale.getdefaultlocale()[1])
+subprocess.Popen(cmd)
+设置->首选项->语言->右下角 替换为空格
+
+312库
+
+$('#id').siblings() 当前元素所有的兄弟节点
+$('#id').prev() 当前元素前一个兄弟节点
+$('#id').prevaAll() 当前元素之前所有的兄弟节点
+$('#id').next() 当前元素之后第一个兄弟节点
+$('#id').nextAll() 当前元素之后所有的兄弟节点
+
+坚持刷OJ
+
+2019-08-7
+前端展示问题
+权限问题
+单个运维人到多个
+
+git reset --hard  回到当前版本
+
+需求：监听mongo数据
+1.数据来自mongo,通过web的接口获取数；
+
+2.网页前端效果和后台接口比对数据；
+
+3.pycharm console 调试接口
+
+
+发邮件的接口api send_mail_service
+
+2019-08-09
+调整标签对齐位置
+<a href="javascript:void(0)" onclick="show_guarder('20A')" style='float:right;margin-top:7px;margin-right:5px;'>看护责任人</a>
+修改长度
+alter table `tbl_perf_guarder` modify user_id varchar(200);
+
+
+
+周一
+击鼓传花隐藏label
+
+create table `tbl_perf_guarder`(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+version VARCHAR(10),
+scenes_id int,
+field varchar(100),
+user_id varchar(200),
+remark VARCHAR(255),
+foreign key(scenes_id) references tbl_perf_scene(id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
