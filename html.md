@@ -42,3 +42,18 @@
 </body>
 </html>
 ```
+
+## jquery 多值填充
+[jquery](https://www.w3cschool.cn/jqueryui/example-autocomplete.html)
+
+
+
+
+
+
+
+
+
+
+
+
