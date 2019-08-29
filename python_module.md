@@ -436,9 +436,23 @@ data = json.loads(data)
 pprint(data)
 print(len(data))
 print(type(data))
-
-
-
 ```
 
+## request发起带params和headers请求  
+``` 
+import requests
+from pprint import pprint
+
+HEADERS = {'PRIVATE-TOKEN': 'HSHfzhx4KWMx2xanPm_c'}
+params = {'more_info': 'true', 'page': '1', 'per_page': '200', 'ref_name': 'master'}
+# web库
+url = r'https://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/repository/commits/'
+
+
+HTTPS_CRT_FILE = r"D:\wokroom_door\web\mysite\config\ca-bundle.crt"
+
+# ret = requests.get(url, params=params, headers=HEADERS, verify=HTTPS_CRT_FILE, timeout=60)
+ret = requests.get(url, params=params, headers=HEADERS, timeout=60)
+pprint(ret.json())
+```
 
