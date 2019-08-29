@@ -408,12 +408,13 @@ countries = sorted(countries.items(), key=lambda x: (int(x[1][0]), int(x[1][1]),
         t.join()
 ```
 
-## urllib带params和headers发起请求  
+## urllib带params和headers发起请求（python3）  
 ``` 
 import urllib.parse
 import urllib.request
 import ssl
 from pprint import pprint
+import json
 
 HEADERS = {'PRIVATE-TOKEN': 'HSHfzhx4KWMx2xanPm_c'}
 params = {'more_info': 'true', 'page': '1', 'per_page': '200', 'ref_name': 'master'}
@@ -428,9 +429,16 @@ context = ssl._create_unverified_context()
 
 request = urllib.request.Request(full_url, headers=HEADERS)
 
-ret = urllib.request.urlopen(request, context=context)
+ret = urllib.request.urlopen(request)
 
-pprint(ret.read())
+data = ret.read().decode('utf-8')
+data = json.loads(data)
+pprint(data)
+print(len(data))
+print(type(data))
+
+
+
 ```
 
 
