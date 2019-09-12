@@ -719,6 +719,413 @@ remark VARCHAR(255),
 foreign key(scenes_id) references tbl_perf_scene(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
+2019-08-12
+
+部署fossid 20B
+登入部署的机器
+查看各参数和调用的任务
+复制替换，询问代码路径
+现获取所有目录，然后看子目录
+
+删除 Software: tiny-AES-c
+增加 Software: Newlib
+
+链表，手动插入表数据19B 20A
+
+
+2019-08-14
+
+django重构击鼓传花
+击鼓传花定位
+基础性能防线优化-前端优化
+冯骋工具word
+fossid 工程维护 <property name="PBI_IDS" value="23247136"/>   OK
+
+
+
+
+
+
+http://5g.rnd.huawei.com/BugTrace/?/bugtrace/view/605/
+DB Error, could not query the database MySQL Error: Unknown column 'z00241929' in 'where clause'Error Query: select detail_version_id, label from bug_trace where bugid=z00241929 order by post_time desc limit 1
+
+周三之前
+2019-08-15
+转测加个背景
+开发背景：提升生命周期交付件质量，准确输出开源软件声明，需开发license自动比对
+提升确认效率
+
+正则表达式
+group(0)表示取全部
+group(1)表示取第一个括号
+
+2019-08-16
+
+输出另一个修改后的文件  OK
+调整格式  OK
+配置执行文件直接放到源文件路径  OK
+增加输出路径  OK
+5G是否使用，如果没有，就都使用  OK
+
+【请假告知】请假2019/8/16 因个人急事请假0.5天，工作无委托，如有事情请电话联系13438490248，给大家带 
+来的不便敬请谅解，谢谢！
+
+2019-08-19
+dts提单脚本添加20B版本
+
+2019-08-20
+
+适配版本空间
+我们这边是根据email或user_id来找id值的
+email和user_id均来自codeclub,codeclub的数据来自git log配置；
+
+模板中的上下文在模板上下文设置中
+
+2019-08-21
+OJ 60 769
+
+php迁移到django项目
+
+1.原项目页面图分析(首页，bug列表页，bug详情页，项目设置页)；
+
+2.根据各页面内容div分析各页面版块，分页面版块需要填充的内容定制后台接口(可以使用google浏览器查看后台数据)；
+
+3.连表sql语句测试，orm返回数据，等序列化；
+
+
+分析门户模块流程
+
+登录页面
+判断是否是post请求，
+    1.get请求获取sesstion，看是否登录；
+        1.1没有获取到user_id，设置test_cookie，render登录界面；
+        1.2从session中获取到了user_id,根据user_id查表，获取用户的姓名，分组,domain，render登录界面；
+    2.post请求(输入密码和用户名点击登录)
+        1.1验证之前设置的cookie；
+        1.2调接口验证用户和密码(从其他华为表取数据)，根据web tbl_user更新bug user的表，登录成功后，前端跳转到首页；
+
+登出api
+获取当前session的user_id，从表中删除，重定向到登录视图；
+
+
+击鼓传花不用登录了，直接可以跳转
+CID用户1，普通用户0,可以添加分组
+
+# pylint: disable=W1401,W0403,W0604,W0612,W0603,R0101,E0401,C0103,C0111,C0301
+
+2019-08-23
+基础性能防线tbl_perf_target刷展示场景
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=8 and tpt.target_name not in ('VOS_PID_NRCU_RTM=1133','NR_UEMDAEMON','NRCU_UEMWORK1','NRDU_UEMWORK1','NRCU_UEMWORK2','NRCU_UEMWORK3','NRDU_UEMWORK3','NR_OMA2','NR_OMA3','NR_OMA4','NRDU_UEMWORK2','NR_OMA1','NR_ENV');
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=8 and tpt.target_name in ('VOS_PID_NRCU_RTM=1133','NR_UEMDAEMON','NRCU_UEMWORK1','NRDU_UEMWORK1','NRCU_UEMWORK2','NRCU_UEMWORK3','NRDU_UEMWORK3','NR_OMA2','NR_OMA3','NR_OMA4','NRDU_UEMWORK2','NR_OMA1','NR_ENV');
+
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=9 and tpt.target_name not in ('NR_CFGMASTER','VOS_PID_NRCU_RTM=1133','NR_CECPM','NRDU_CERMC','NR_UECPM','NRDU_UEBPRMC','NRCU_CEIM','NRDU_CEIMC','NRCU_ICEM','NR_TIFM','NRDU_UEUPMC','NR_UEUPA','NR_PAGING','NR_LICM','NRCU_CERRM','NRCU_LNWM','NR_OM','NR_OMA2','NR_OMA4','NRDU_ICEMC','NRCU_ICEMSLAVE','NR_ENV','NR_OMA1');
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=9 and tpt.target_name in ('NR_CFGMASTER','VOS_PID_NRCU_RTM=1133','NR_CECPM','NRDU_CERMC','NR_UECPM','NRDU_UEBPRMC','NRCU_CEIM','NRDU_CEIMC','NRCU_ICEM','NR_TIFM','NRDU_UEUPMC','NR_UEUPA','NR_PAGING','NR_LICM','NRCU_CERRM','NRCU_LNWM','NR_OM','NR_OMA2','NR_OMA4','NRDU_ICEMC','NRCU_ICEMSLAVE','NR_ENV','NR_OMA1');
+
+
+2019-08-26
+# 获取看护人配置，只要显示的场景
+select tpg.id, tpg.version, tpg.remark, tps.scene_name, tpg.field, tpg.user_id 
+from tbl_perf_guarder as tpg inner join tbl_perf_scene as tps on tpg.scenes_id=tps.id 
+left join tbl_user as tu on tpg.user_id=tu.user_id 
+where tpg.version='20B' and scenes_id in (24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37) 
+order by tpg.id;
+
+# 获取要显示的所有场景
+scenes_id = PerfTarget.objects.filter(display=1, version=version_dict[version]).values_list('target_s_id',flat=True).distinct()
+
+# 生产库补齐没有显示的场景
+
+2019-08-27
+# 和库之后再执行，还有脚本刷库
+insert into tbl_perf_guarder
+(version, scenes_id)
+values 
+('20A', 2),
+('20A', 11),
+('20A', 13),
+('20A', 16);
+
+2019-08-28
+击鼓传花跳转(测试环境)，跳转过去到的是生产库，需要改两个地方的配置
+
+
+be469d4712b5c7a9a1bad959d004c0956b607f05
+
+2019-08-29
+切https
+
+checkin脚本  web项目  数据库
+requests
+urllib.request.urlopen()
+
+
+import urllib
+import requests
+url = r'https://code.huawei.com/api/v3/projects/Polestar_CID%2Fweb/repository/commits/'
+url = r'http://code.huawei.com/api/v3/projects/Polestar_CID/web/repository/commits/'
+
+
+HEADERS = {'PRIVATE-TOKEN': 'HSHfzhx4KWMx2xanPm_c'}
+params = {'more_info': 'true', 'page': '1', 'per_page': '200', 'ref_name': 'master'}
+HTTPS_CRT_FILE = r"D:\wokroom_door\web\mysite\config\ca-bundle.crt"
+result = requests.get(url, headers=HEADERS, params=params, verify=HTTPS_CRT_FILE, timeout=60)
+
+
+request = urllib.request.Request(url, headers=HEADERS)
+response = urllib.request.urlopen(request, data=params)
+
+action="?/bugtrace/add/"
+表单直接提交问题
+
+
+select * from tbl_user_groups as tug inner join (select id from tbl_user where user_id="z00355998") as tbl_user inner join auth_group as ag on tug.group_id=ag.id where tug.user_id=tbl_user.id and ag.display=1;
+tuple([1,2])
+(1, 2)
+tuple([1])
+(1,)
+
+
+看护人和场景强绑定，增加一个看护人字段，但是场景又是一对多的？？？
+2019-08-30
+切换远端库
+.gitconfig添加远端库
+git remote -v查看
+git remote rm origin
+
+
+2019-09-02
+dts同步提单看护
+手动插入其他平台dts提单数据，修改击鼓传花状态；
+定位dts同步提单失败；
+insert into tbl_dts (dts_id, dts_type, type_id, version_R, version_C, version_baseline, desc_brief, desc_detail, creator, next_handler)
+values ('DTS2019083103052', 3, 627, 'BTS3900 V100R016', 'BTS3900 V100R016C00', 'BTS3900 V100R016C00B000', 'LN并发模块，CPRIMUX组网，LTE为汇聚方。被汇聚方N侧RRU断链', 'LN并发模块，CPRIMUX组网，LTE为汇聚方。被汇聚方N侧RRU断链', 'zhengyanan 00405918', 'zhengyanan 00405918');
+
+刷新tbl_user用户表
+
+$('.stop-enter').keydown(function(){
+    console.log('hello johnson');
+    if (event.keyCode==13) {
+        return false;
+    }
+});
+jquery enter时间捕捉
+
+2019-09-02
+
+击鼓传花dts单脚本修改；OK
+email检查并自动更正；  OK
+击鼓传花django后台；  
+刷mongo，还没有做完https迁移
+
+USER_ID = 'xwx620452'
+PRIVATE_TOKEN = 'HSHfzhx4KWMx2xanPm_c'
+HTTPS_CRT_FILE = r"D:\wokroom_door\web\mysite\config\ca-bundle.crt"
+
+(http://|https://)(code-sh.rnd.huawei.com|code.huawei.com)
+
+
+git reset a4e215234aa4927c85693dca7b68e9976948a35e MainActivity.java
+git checkout .
+git commit -m "info"
+
+换库以后切换git配置
+[remote "origin"]
+    url = http://code-sh.rnd.huawei.com/5gcid/web.git 
+    fetch = +refs/heads/*:refs/remotes/origin/*
+
+门户测试环境
+10.186.87.54：8080
+http://10.186.87.54:8080/login/?next=/
+
+
+ftp上传服务器接口
+10.171.25.20 
+
+作为另一个结果的子查询
+select id from tbl_perf_scene as tps where tps.id not in (select scenes_id as id from tbl_perf_guarder as tpg where tpg.version='20B'); 
+
+a = PerfGuard.objects.filter(version="20B").values_list('scenes_id',flat=True)
+b = PerfScene.objects.values_list('id', flat=True)
+b - a
+
+Manager.raw()只能查询，不能插入语句
+2019-09-04
+击鼓传花新增关联功能
+刷基础性能防线数据库
+击鼓传花django后台；
+上线基础性能防线功能改进
+
+击鼓传花bug添加DTS手动提单字段
+
+1.git rebase -i 不是自己提交的那个最早节点
+2.遇到问题解决， 保留最新或旧的commi comment
+3.解决冲突，git rebase --continue
+4.检查代码，产生了一个新的commit信息
+
+
+远程回退git push -f
+navicat拖拽同步表
+alert调试jquery流程
+
+2019-09-05
+1.后台接收参数名细看，前端name="dts_doer "多了一个空格造成后台参数名多了一个下划线；
+2.数据库改参数，根据依据获取变量，理清调用关系，一层一层往上走的；
+
+修改数据库字段长度
+alter table bug_trace modify column root_cause char(10);
+alter table bug_trace modify column root_cause_explain char(255);
+
+git reset --hard 强制回到本地head
+一般使用git reset HEAD <file>
+git rm --cached 文件名 ，可以从缓存区移除文件，使该文件变为未跟踪的状态，
+
+git push -f
+
+git branch -vv
+git branch -r
+git checkout -b 本地分支名x origin/远程分支名x
+
+查找commit info
+#查当前分支
+git log | grep "message"——
+#查本地的BanchName分支
+git log BanchName | grep "message"
+#查远程的BanchName分支
+git log origin/BanchName | grep "message"
+git show commit_number  显示修改信息
+
+20A 20B
+
+CODE MBTS
+MBTS fossid工程
+20A施旭涛
+20B宣树兵
+
+alter table `bug` add DTS_number varchar(100);
+2019-09-06
+1.每日版本中，查看击鼓传花增加版本号信息；
+2.部署新的脚本工具；
+
+寻找基础性能防线如何渲染的数据，发现和是否超上限的关系；
+打开响应，看响应的数据结构，绑定相关数据；
+
+2019-09-06
+修改前端选择过滤功能
+
+
+2019-09-09
+git rebase -i master
+
+alter table `tbl_perf_target` add daily_upper_limit INTEGER;
+
+fossid维护
+
+post_time = models.DateTimeField(auto_now_add=True)
+update_time = models.DateTimeField(auto_now=True)
+
+git log -n 10
+git diff --check
+git diff --cached
+
+
+# 每日防线加上dts单号
+
+django 模型添加报错
+字段如果为空可以输入None，如果类型是int，给空字符串会报错
+ValueError: invalid literal for int() with base 10: ''
+
+2019-09-11
+
+dts迁移到web
+fossid
+django集成
+
+pip freeze > requirements.txt
+1.ftp服务器1.控制面板->程序和功能->打开或关闭windows功能,在列表里面找到 internet信息服务,选中"ftp服务",确定.
+2.异步回调  Pool().apply_async(uploadfile, (file_name, file_path), callback=os.remove)
+3.ftp上传服务器接口
+def uploadfile(filename, localpath):
+    try:
+        ftp_server = '10.62.59.53'
+        username = 'xwx620452'
+        password = 'xq19921005....'
+        ftp = FTP()
+        ftp.connect(ftp_server, 21)
+        ftp.login(username, password)
+
+        remotepath = filename
+        bufsize = 1024
+        fp = open(localpath, 'rb')
+        ftp.storbinary('STOR ' + remotepath, fp, bufsize)  # 上传文件
+        fp.close()  # 关闭文件
+        ftp.quit()
+    except Exception as MSG:
+        print('上传失败:', MSG)
+    return localpath
+4.django接收文件
+file = request.FILES.get('attach', 'false')
+
+if file != 'false':
+    file_name = str(bug.post_time) + '.file'
+    file_path = os.path.join(os.path.dirname(settings.BASE_DIR), 'static', 'tmp', file_name)
+    with open(file_path, 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+
+时间搓转时间
+pycharm代码补全
+File → Setting → Editor → Code Completion → 
+
+2019-09-12
+连表级联删除
+
+20B刷生产库，隐藏掉多余的数据
+
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=8 and tpt.target_name not in ('VOS_PID_NRCU_RTM=1133','NR_UEMDAEMON','NRCU_UEMWORK1','NRDU_UEMWORK1','NRCU_UEMWORK2','NRCU_UEMWORK3','NRDU_UEMWORK3', 'NR_OMA2','NR_OMA3','NR_OMA4','NRDU_UEMWORK2','NR_OMA1','NR_ENV', 'ROSA_SWM_LOCAL_PID');
+
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=9 and tpt.target_name not in ('NR_CFGMASTER','VOS_PID_NRCU_RTM=1133','NR_CECPM','NRDU_CERMC','NR_UECPM','NRDU_UEBPRMC','NRCU_CEIM','NRDU_CEIMC','NRCU_ICEM','NR_TIFM','NRDU_UEUPMC','NR_UEUPA','NR_PAGING','NR_LICM','NRCU_CERRM','NRCU_LNWM','NR_OM','NR_OMA2','NR_OMA4','NRDU_ICEMC','NRCU_ICEMSLAVE','NR_ENV','NR_OMA1', 'ROSA_SWM_LOCAL_PID');
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=8 and tpt.target_name='ROSA_SWM_LOCAL_PID';
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=9 and tpt.target_name in ('ROSA_SWM_LOCAL_PID', 'NR_PAGING');
+
+2019-09-12
+前端bug, bugtrace提交时
+CIE权限认证
+登录重定向
+文件共享解决方案
+提交人不存在bugtrace库
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
