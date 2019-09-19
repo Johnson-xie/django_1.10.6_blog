@@ -164,7 +164,13 @@ where (tug.group_id is not null) and tu.user_id<>'') as new
 on ag.id=new.group_id;
 ```
 
-
+## 外键约束影响删除  
+* 先取消约束，删除，再回复约束  
+```  
+SET FOREIGN_KEY_CHECKS=0; 
+delete from tbl_perf_scene where id in (63, 64,65,66,67);
+SET FOREIGN_KEY_CHECKS=1; 
+```
 
 
 
