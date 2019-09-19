@@ -431,7 +431,18 @@ git diff HEAD~2 查看HEAD和之前第二个commit的不同点
 ## 远程仓库回退  
 1.本地git log --oneline
 2.git reset --hard commit_id
-3.git push -f 推送回退的版本，远端即回退
+3.git push -f 推送回退的版本，远端即回退  
+4.直接强推  
+
+## git撤销工作  
+```  
+git checkout file_path（撤销工作区中的修改）
+git reset file_path(撤销暂存区的修改到当前工作区)----->再git checkout file_path撤销工作区的修改
+查看暂存区中的文件修改
+git diff --cached file_path
+查看工作区文件修改
+git diff file_path
+```
 
 # timeit  
 ```  
