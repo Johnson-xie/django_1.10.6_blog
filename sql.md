@@ -142,8 +142,27 @@ VALUES('123456', 'guest', 'johnson', 'chenziwei', 'johnson@163.com', '1343849024
 * 刷数据库时，先使用硬编码sql语句，开刷后使用for循环模板语法替换
 
 
+## 根据字段分组筛选分组后大于某个值的分组名  
+```  
+SELECT target_id, count(target_id) as count
+FROM `tbl_perf_record`
+group by target_id
+having count(target_id)>3;
+```
 
-
+## 连表生成新的表后，用已有新字段再进行连表查询  
+```  
+-- 已有角色所在分组与domain
+select new.id, new.user_id, new.name_chs, new.email, new.`group`, new.domain, ag.`name`
+from auth_group as ag
+inner join
+(select tu.id as id, tu.user_id as user_id, tu.name_chs as name_chs, tu.email_address as email, tg.`name` as `group`, td.`name` as domain, tug.group_id
+from tbl_user as tu left join tbl_user_groups as tug on tu.id=tug.user_id
+left join tbl_group as tg on tu.`group`=tg.id
+left join tbl_domain as td on tu.domain_id=td.id and tg.id=td.group_id
+where (tug.group_id is not null) and tu.user_id<>'') as new
+on ag.id=new.group_id;
+```
 
 
 
