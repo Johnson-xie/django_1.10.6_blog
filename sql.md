@@ -170,6 +170,16 @@ on ag.id=new.group_id;
 SET FOREIGN_KEY_CHECKS=0; 
 delete from tbl_perf_scene where id in (63, 64,65,66,67);
 SET FOREIGN_KEY_CHECKS=1; 
+```  
+
+## 同一张表上子表进行关联，找出同一指标字段对应id  
+```  
+-- 生成子表再关联查询
+select t1.id as old_id, t2.id as new_id, t1.target_name from
+(select id, target_name from tbl_perf_target as tpt where tpt.scene_id=8 and version =25 and display=1) as t1
+JOIN
+(select id, target_name from tbl_perf_target as tpt where tpt.scene_id=68 and version =25 and display=1) as t2
+on t1.target_name=t2.target_name;
 ```
 
 
