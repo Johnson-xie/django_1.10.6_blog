@@ -129,4 +129,27 @@ git reset file_path(撤销暂存区的修改到当前工作区)----->再git chec
 git diff --cached file_path
 查看工作区文件修改
 git diff file_path
-```
+```  
+
+# rebase  
+* 处于游离状态 HEAD detached from commit_id  
+`git checkout -b new_branch`  
+
+* rebase解决冲突  
+```  
+git add .
+git rebase --continue
+```  
+
+* git 末行模式执行批量修改  
+批量替换pick为fixup
+`%s/pick/fixup/g`  
+
+* 在自己的分支rebase commit  
+`git rebase -i master`  
+不是自己的可以丢弃(drop)  
+同步代码一定要到最后提交代码的时候再同步  
+
+
+
+
