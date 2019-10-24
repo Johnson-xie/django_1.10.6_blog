@@ -2,14 +2,14 @@
 * 后台设置  
 
 """  
-# 接收参数  
+接收参数  
 version = request.POST.get('version', '')  
 scene_selected = request.POST.get('scene_selected', '')  
 datetime_start = request.POST.get('datetime_start', '')  
 datetime_end = request.POST.get('datetime_end', '')  
 date_direction = request.POST.get('date_direction', '')  
 
-# 新建excel文件
+新建excel文件
 import openpyxl
 filename = '文件名.xlsx'
 response = HttpResponse(content_type='text/xlsx; charset=utf-8')
