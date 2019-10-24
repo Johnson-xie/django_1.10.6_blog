@@ -1,7 +1,7 @@
 # 后台返回excel响应字节流对象，前端直接获取下载excel文件
 * 后台设置  
 
-"""  
+'''  
 接收参数  
 version = request.POST.get('version', '')  
 scene_selected = request.POST.get('scene_selected', '')  
@@ -17,7 +17,7 @@ response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escap
 workbook = openpyxl.Workbook()
 workbook.save(response)
 return response
-"""  
+'''  
 
 ## method 1
 * get请求过长，使用post表单模拟，页面会进行实时刷新
