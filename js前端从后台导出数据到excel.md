@@ -1,7 +1,7 @@
 # 后台返回excel响应字节流对象，前端直接获取下载excel文件
 后台设置  
 
-'''  
+```
 接收参数  
 version = request.POST.get('version', '')  
 scene_selected = request.POST.get('scene_selected', '')  
@@ -17,11 +17,11 @@ response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escap
 workbook = openpyxl.Workbook()
 workbook.save(response)
 return response
-'''  
+``` 
 
 ## method 1
 * get请求过长，使用post表单模拟，页面会进行实时刷新
-"""  
+```
 var export_url = "/xxx/xxx/xxx/";  
         var data = {  
             "version": version,  
@@ -47,14 +47,14 @@ var export_url = "/xxx/xxx/xxx/";
         form.submit();  
         form.remove();  
     }  
-"""  
+```
 
 ## mthod 2  
 * 防止页面刷新 
 注意，这里的submitData是使用jquery构建key:value的form参数对象。传入导出方法后被解析还原成form表单数据。
 代码的思路就是，利用隐藏的iframe内嵌模块，在iframe内部post表单提交导出我们想要的数据，页面翻转也仅发生在iframe内部，
 我们的主页面并不会发生翻转，从而达到仿异步post导出的效果。
-"""  
+```  
 _export = {  
         canExport:false,  
         post:function(data,exportUrl) {  
@@ -79,11 +79,11 @@ _export = {
         }  
 }  
 _export.post(submitData,exportUrl);  
-"""  
+```
 
 ## method 3  
 * 还是写上get请求  
-"""  
+``` 
 var exportUrl = '/xxx';  
 window.open(exportUrl);  
-"""  
+```  
