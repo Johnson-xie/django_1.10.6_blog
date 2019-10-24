@@ -18,6 +18,7 @@ workbook = openpyxl.Workbook()
 workbook.save(response)
 return response
 """  
+
 ## method 1
 * get请求过长，使用post表单模拟，页面会进行实时刷新
 """  
