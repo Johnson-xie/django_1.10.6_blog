@@ -1115,6 +1115,441 @@ CIE权限认证
 提交人不存在bugtrace库
 
 
+2019-09-12
+连表级联删除
+
+20B刷生产库，隐藏掉多余的数据
+
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=8 and tpt.target_name not in ('VOS_PID_NRCU_RTM=1133','NR_UEMDAEMON','NRCU_UEMWORK1','NRDU_UEMWORK1','NRCU_UEMWORK2','NRCU_UEMWORK3','NRDU_UEMWORK3', 'NR_OMA2','NR_OMA3','NR_OMA4','NRDU_UEMWORK2','NR_OMA1','NR_ENV', 'ROSA_SWM_LOCAL_PID');
+
+update tbl_perf_target as tpt
+set display=0
+where tpt.scene_id=9 and tpt.target_name not in ('NR_CFGMASTER','VOS_PID_NRCU_RTM=1133','NR_CECPM','NRDU_CERMC','NR_UECPM','NRDU_UEBPRMC','NRCU_CEIM','NRDU_CEIMC','NRCU_ICEM','NR_TIFM','NRDU_UEUPMC','NR_UEUPA','NR_PAGING','NR_LICM','NRCU_CERRM','NRCU_LNWM','NR_OM','NR_OMA2','NR_OMA4','NRDU_ICEMC','NRCU_ICEMSLAVE','NR_ENV','NR_OMA1', 'ROSA_SWM_LOCAL_PID');
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=8 and tpt.target_name='ROSA_SWM_LOCAL_PID';
+
+update tbl_perf_target as tpt
+set display=1
+where tpt.scene_id=9 and tpt.target_name in ('ROSA_SWM_LOCAL_PID', 'NR_PAGING');
+
+2019-09-12
+前端bug, bugtrace提交时
+CIE权限认证
+登录重定向
+文件共享解决方案
+提交人不存在bugtrace库
+
+2019-09-17
+连表删除失败
+-- select *
+-- FROM `tbl_perf_scene` as tps, tbl_perf_target as tpt, tbl_perf_record as tpr
+-- where tps.id=tpt.scene_id and tpt.id=tpr.target_id 
+-- and tps.id in (61, 62);
+
+
+
+delete tps,tpt,tpr
+FROM `tbl_perf_scene` as tps
+inner join tbl_perf_target as tpt on tps.id=tpt.scene_id
+inner join tbl_perf_record as tpr on tpt.id=tpr.target_id 
+where tps.id in (61, 62);
+
+SET FOREIGN_KEY_CHECKS=0; 
+delete from tbl_perf_scene where id in (61, 62);
+SET FOREIGN_KEY_CHECKS=1; 
+
+清理掉多余的target数据
+
+allow_writeable_chroot=YES
+service vsftpd restart
+
+
+
+ftp://10.171.25.20:21/quality_report_info/upload/
+
+2019-09-17
+继续验证django
+统计未分组人员信息
+
+以版本为单位
+
+一、场景按版本拆开
+1.表场景一对多;
+2.增加版本字段，生成时间，退出时间;
+二、理清新增场景过程
+
+1. 恢复改名带来的20A数据线不连续问题
+2. 把场景定义，按版本为单位拆开，并增加版本(大版本)、场景产生时间、退出时间三个字段
+3. 梳理表结构关系，发给李培成。
+
+# 恢复20A场景，删除新增数据，调整数据所在的id
+63 240下单板
+64 240下主控板
+65 240 下基带
+66 NRAT_TRAFFIC
+67 NRAT_SERVICE
+SET FOREIGN_KEY_CHECKS=0; 
+delete from tbl_perf_scene where id in (63, 64,65,66,67);
+SET FOREIGN_KEY_CHECKS=1; 
+
+AM模式400用户均值灌包,接入400用户 20用户RLC轮询灌包------停止看护
+UPDATE tbl_perf_target
+set display=0
+where scene_id=31 and version=22;
+2019-09-19
+角色筛选
+
+
+2019-09-19
+-- 已有角色所在分组与domain
+select new.id, new.user_id, new.name_chs, new.email, new.`group`, new.domain, ag.`name`
+from auth_group as ag
+inner join
+(select tu.id as id, tu.user_id as user_id, tu.name_chs as name_chs, tu.email_address as email, tg.`name` as `group`, td.`name` as domain, tug.group_id
+from tbl_user as tu left join tbl_user_groups as tug on tu.id=tug.user_id
+left join tbl_group as tg on tu.`group`=tg.id
+left join tbl_domain as td on tu.domain_id=td.id and tg.id=td.group_id
+where (tug.group_id is not null) and tu.user_id<>'') as new
+on ag.id=new.group_id;
+
+
+--没有角色的用户所在分组与domain 
+-- select tu.id, tu.user_id, tu.role, tu.name_chs, tu.email_address, tg.`name` as `group`, td.`name` as domain, tug.group_id
+-- from tbl_user as tu left join tbl_user_groups as tug on tu.id=tug.user_id
+-- left join tbl_group as tg on tu.`group`=tg.id
+-- left join tbl_domain as td on tu.domain_id=td.id and tg.id=td.group_id
+-- where (tug.group_id is null or tug.group_id="") and tu.user_id<>''; 
+
+涉及的表tbl_user_groups,tbl_user, auth_group,  -----tbl_group,tbl_domain
+
+
+
+sql分组条件查询
+SELECT target_id, count(target_id) as count
+FROM `tbl_perf_record`
+group by target_id
+having count(target_id)>3;
+
+git checkout file_path（撤销工作区中的修改）
+git reset file_path(撤销暂存区的修改到当前工作区)----->再git checkout file_path撤销工作区的修改
+查看暂存区中的文件修改
+git diff --cached file_path
+查看工作区文件修改
+git diff file_path
+
+2019-09-20
+-- 生成子表再关联查询
+select t1.id as old_id, t2.id as new_id, t1.target_name from
+(select id, target_name from tbl_perf_target as tpt where tpt.scene_id=8 and version =25 and display=1) as t1
+JOIN
+(select id, target_name from tbl_perf_target as tpt where tpt.scene_id=68 and version =25 and display=1) as t2
+on t1.target_name=t2.target_name;
+
+--查看多个版本公用的场景
+select *
+from
+(SELECT distinct(scene_id) as id FROM `tbl_perf_target` where version=22 order by id) as t1
+right join
+(SELECT distinct(scene_id) as id FROM `tbl_perf_target` where version=25 order by id) as t2
+on t1.id=t2.id;
+
+2019-09-20
+基础性能防线展示逻辑
+
+-- 场景和指标连表，版本号和display做限制，列出展示场景
+-- select distinct tpt.scene_name, tpt.id 
+-- from tbl_perf_scene tpt join tbl_perf_target tps on tps.scene_id=tpt.id
+-- where tps.display=1 and tps.version = 25
+-- order by tps.id;
+
+
+-- 场景与看护人表，确定一一对应，没有就插入
+-- select id from tbl_perf_scene as tps where tps.id not in (select scenes_id as id from tbl_perf_guarder as tpg where tpg.version='20B'); 
+
+
+-- 查出所有要显示的指标及对应看护人和场景
+-- select tpg.field, tpg.user_id, tps.scene_name, tps.scene_desc, tpt.id, tpt.target_name, tpt.lower_limit, tpt.upper_limit, tpt.name_related, tpt.daily_upper_limit 
+-- from tbl_perf_target as tpt join tbl_perf_scene as tps on tpt.scene_id=tps.id 
+-- left join tbl_perf_guarder as tpg on tps.id=tpg.scenes_id 
+-- where tpt.display=1 and tpt.version=25 and tpg.version='20B' 
+-- order by tps.id asc,tpt.id asc;
+
+
+-- 根据各指标id获取最近5天的数据
+-- select 1 as id, tpr.`date`, tpr.`value`
+-- from tbl_perf_record tpr
+-- where tpr.target_id = 1672 and tpr.`date` in ('2019/09/16', '2019/09/17', '2019/09/18', '2019/09/19', '2019/09/20')
+
+2019-09-24
+makemigrations 会去获取所有外键关联的表
+
+CREATE TABLE tbl_perf_scene_plus (
+`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`version` integer,
+`scene_name` varchar(200),
+`scene_desc` varchar(200), 
+`scene_remark` varchar(200), 
+`start` datetime, 
+`end` datetime, 
+`guarder` varchar(200), 
+`field` varchar(200), 
+`guard_remark` varchar(200), 
+`is_active` bool NOT NULL,
+ foreign key(version) references tbl_project(id_project)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+CREATE TABLE tbl_perf_target_plus (
+`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`scene_id` INT unsigned NOT NULL,  # 外键和主键类型一致
+`target_name` varchar(200) NOT NULL,
+`lower_limit` varchar(200), 
+`upper_limit` varchar(200), 
+`name_related` varchar(200), 
+`daily_upper_limit` varchar(200), 
+`display` bool NOT NULL, 
+ foreign key(scene_id) references tbl_perf_scene_plus(id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `tbl_perf_record_plus` (
+`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`target_id` int unsigned not null,
+`date` varchar(45) NOT NULL,
+`value` varchar(200) NOT NULL, 
+`commit_number` integer NOT NULL, 
+`is_lower_limit` bool NULL, 
+`is_upper_limit` bool NULL, 
+`is_daily_upper_limit` bool NULL, 
+`today_trend` integer NULL,
+`more` text NULL, 
+ foreign key(target_id) references tbl_perf_target_plus(id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tbl_perf_daily_plus` (
+`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`date` varchar(45), 
+`daily_desc` varchar(500), 
+`version` integer,
+ foreign key(version) references tbl_project(id_project)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+--------------------------
+
+-- 给记录表增加字段
+-- alter table tbl_perf_record_c add commit_number tinyint not null default '1';
+-- alter table tbl_perf_record_c add is_lower_limit bool null;
+-- alter table tbl_perf_record_c add is_upper_limit bool null;
+-- alter table tbl_perf_record_c add is_daily_upper_limit bool null;
+-- alter table tbl_perf_record_c add more text null;
+
+# 根据外键过滤和排序
+target_set = PerfTarget.objects.filter(scene__version=version_dict[version], scene__is_active=1).filter(is_display=1).order_by('scene__id', 'name')
+
+2019-09-24
+dts提单提单，合并函数
+基础性能防线，商量接口
+
+1.建议先把id=1的场景迁移剥离20A(生成新场景，然后迁移数据)；
+1.1手动增加一条数据，名字先不一样
+insert into tbl_perf_scene (scene_name, scene_desc) values ('上行调度32户灌包(20B)', '24+8(第一轮+第二轮)，17个等效带宽，配对层数2层');
+1.2跑数据脚本迁移(20A_20B)
+1.3建新的场景表，跑场表迁移
+CREATE TABLE tbl_perf_scene_plus (
+`id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`version` integer,
+`scene_name` varchar(200),
+`scene_desc` varchar(200), 
+`scene_remark` varchar(200), 
+`start` varchar(40), 
+`end` varchar(40), 
+`guarder` varchar(200), 
+`guard_field` varchar(200), 
+`guard_remark` varchar(200), 
+`is_active` bool NOT NULL,
+ foreign key(version) references tbl_project(id_project)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
+场景表修改
+# TODO
+# 就地原表增加字段
+alter table tbl_perf_scene add( 
+`version` integer,
+`scene_remark` varchar(200) default '', 
+`start` varchar(40) default '', 
+`end` varchar(40) default '', 
+`guarder` varchar(200) default '', 
+`guard_field` varchar(200) default '', 
+`guard_remark` varchar(200) default '',
+`display` bool NOT NULL default True, 
+`is_active` bool NOT NULL default True);
+
+# 填充区分版本
+update tbl_perf_scene
+set version=25
+where id=1 or (id>=38 and i<>74);
+
+update tbl_perf_scene
+set version=22
+where not (id=1 or (id>=38 and id<>74));
+
+2.tbl_perf_record增加新的字段
+alter table tbl_perf_record add( 
+commit_number varchar(10) null default '1',
+is_lower_limit varchar(10) null default '',
+is_upper_limit varchar(10) null default '',
+is_daily_upper_limit varchar(10) null default '',
+today_trend varchar(10) null default '',
+`more` varchar(200) null default '');
+
+
+# 指标表修改
+tbl_perf_target修改字段
+# alter table tbl_perf_target modify column daily_upper_limit char(45);  # 生产库已经同步
+
+alter table tbl_perf_target add( 
+start varchar(20) null default '',
+end varchar(20) null default '');
+
+# 看护人表解除外键关联 --待测试显示数据
+1.查看外键约束
+show create table tbl_perf_guarder
+
+-- CREATE TABLE "tbl_perf_guarder" (
+--   "id" int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   "version" varchar(10) DEFAULT NULL,
+--   "scenes_id" int(11) DEFAULT NULL,
+--   "field" varchar(100) DEFAULT NULL,
+--   "user_id" varchar(200) DEFAULT NULL,
+--   "remark" varchar(255) DEFAULT NULL,
+--   PRIMARY KEY ("id"),
+--   KEY "scenes_id" ("scenes_id"),
+--   CONSTRAINT "tbl_perf_guarder_ibfk_1" FOREIGN KEY ("scenes_id") REFERENCES "tbl_perf_scene" ("id")
+-- ) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8
+2.删除查出的外键约束
+Alter table tbl_perf_guarder drop foreign key tbl_perf_guarder_ibfk_1
+
+
+3.daily表外键关联修改  # 暂不考虑迁移该表
+
+4.19B未迁移出
+
+5.导出功能
+
+6.是否超限结果计算并存储以及标记第几次上传
+    6.1排序分组查询语句select * from (select * from tbl_perf_record where target_id=1672 and date in (21,22,23,24,25) order by date desc, commit_number desc) as t group by date;
+    6.2上传时要先查询对应指标和日期是否存在
+    6.3添加今日趋势字段
+
+7.测试checkin, 首次数据理
+
+------------------------------------------------------------------------------------------
+邮件配置数据库查询
+SELECT * FROM Bug.bug where id=661;
+
+SELECT B.id,`user`.userid,B.smstime,B.version,B.module,
+    B.title,B.group_name,B.cur_groupinittime, B.content, B.post_time,
+    B.bugid FROM user RIGHT JOIN (SELECT * FROM  (SELECT * FROM  
+    (SELECT bug_trace.id, bug_trace.bugid,bug.title,bug.version,bug.module,bug_trace.doer,
+     bug_trace.smstime, `group`.group_name,bug_trace.post_time,bug.cur_groupinittime,
+      bug_trace.content FROM bug,bug_trace,`group` 
+      WHERE bug.state = 0 AND bug.id = bug_trace.bugid 
+      AND bug.cur_groupid = `group`.id ORDER BY bug_trace.id DESC)  
+      AS A GROUP BY A.bugid )  AS bug_IdAndTime) AS B 
+      on (user.id=B.doer) where bugid=661 GROUP BY B.bugid ORDER BY B.id DESC;
+
+
+select 5G_cid_mail_id from `group` where group_name="CRSP";
+
+
+select id, scope from version where version_name="BTS3900 V100R016C10";
+
+-- select * from sms_info_map where mail_group_id=10 and version_id=17 and scope=1;
+select * from sms_info_map where mail_group_id=0 and version_id=0 and scope=1;
+------------------------------------------------------------------------------------------
+
+
+需求：自动挂接击鼓传花提单到版本信息--宣树兵
+
+
+多字段分组
+看护发邮件脚本
+修改version字段长度
+alter table address modify column city char(30);
+30代表可以存储30个英文字符(包含数字)，utf-8编码汉子可以存储10个；30指的是字节
+pycharm输入逗号多按一次引号就跳出
+
+国庆来的工作
+1.启动dts提单，跟踪宣树兵、施旭涛，找杨萍；
+2.基础性能防线页面；
+
+
+# TODO 
+tbl_perf_target修改字段
+alter table tbl_perf_target modify column daily_upper_limit char(30);
+
+
+2019-10-12
+找陈瑞沟通上传数据的接口
+日增量上限现在是数字,准备适配后面的情况；
+
+
+2019-10-14
+批量上传接口
+解除看护人外键关联
+
+第二版再迭代
+计算结果后再上传
+
+
+myapps = App.objects.filter(~Q(name= ''))
+
+insert into user (userid, username, name_chs, `level`, app_id) VALUES
+('z00304115', 'zhouqingyu', '周擎宇', 20, 0)
+http://5g.rnd.huawei.com/api/user/get/?user_id=z00304115
+
+击鼓传花673强行关闭 修改了state=1, sync_dts=1, DTS=DTS2019101704428
+出现错误关闭不了
+
+
+2019-10-17
+准备迁移数据库
+1.确定437数据挂的是原空域调度的记录；
+    确认后还原场景为1
+2.脚本进行迁移；
+437----->2259
+
+本地搭一个测试环境，联系伍键根据接口每日定时执行或商量好执行时间进行上传
+insert into tbl_dts_type (dts_type) values ('重复引入头文件检查');
+
+
+1.增加重复引入头文件检查提单；提单策略为一周一次，任务添加到dts_static.py中，同动态检查、codex、codemars检查一起串行执行；
+2.在原有静态检查中，跳过cppcheck中pdcp检查自动提单;
+3.删除多余注释，调整导包顺序；
+4.静态检查和codex在填充详细信息desc_detail时，需要分组和模块信息，原为硬编码，数据库表basic_quality_pdugroup增加了分组,暂时手动完善了硬编码。
+
+分组
+select domain_id as 区域, count(*) as 用户数量, max(login_number) as 最大登录号
+from tbl_user
+group by `group`
+having count(*) > 100
+order by 最大登录号, 用户数量;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
