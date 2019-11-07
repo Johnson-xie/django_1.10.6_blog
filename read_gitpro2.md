@@ -84,7 +84,15 @@ git add readme
 --relative-date  
 --graph  
 --pretty  
-```
+```  
+
+* git log --since=2.weeks  
+* git log --author=xwx620452  
+* git log --grep=压缩  
+* git log --author=xwx620452 --grep=压缩 --all-match  
+* git log -Sfunction_name `git log -Sdef` (添加或移除了def的提交操作)  
+
+
 
 
 
