@@ -91,8 +91,46 @@ git add readme
 * git log --grep=压缩  
 * git log --author=xwx620452 --grep=压缩 --all-match  
 * git log -Sfunction_name `git log -Sdef` (添加或移除了def的提交操作)  
+```  
+-n  
+--since,  --after  
+--util, --before  
+--author  
+--committer  
+--grep  
+-S  
+```  
+* git	log	--pretty="%h	-	%s"	--author=gitster	--since="2008-10-01" --before="2008-11-01"	--no-merges  
 
+* 撤销操作  
+* git commit --amend -m "info" 什么都不改，提交，不改变快照，只改变提交信息，id也会变 
+* git commit --amend --no-edit  
 
+* 取消暂存文件  
+* git reset HEAD file  
+* git checkout file 危险信号  
+
+* 远程仓库  
+* git remote 查看远程仓库  
+* git remote -v  
+* git remote add library_name(custom) url 添加远程仓库  
+* git fetch [remote-name]  
+* git pull origin master  
+* git push origin master
+* git remote show [remote-name]  
+* git remote rename origin 5gweb 修改远程仓库的简写名，也会修改远程分支名字   
+* git remote rm johnson 移除远程仓库  
+
+* 重大节点，打标签  
+* git tag  
+* git tag -l 'v1.0.1*'  
+* git tag -a v1.4 -m "my version 1.4"  
+* git tag v1.0.1  
+* git tag v1.4-lw  
+* git tag -a v1.2  hash-id(校验和) 补打标签  
+* git show tag_name  
+* git push不会传送标签，需要显示推送 `git push origin v1.2`  
+* git tag origin --tags 推送所有标签  
 
 
 
