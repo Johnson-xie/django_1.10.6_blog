@@ -10,7 +10,6 @@
 ### add the file ----> edit the file ---> add the file ---> commit file  
 * git init  
 * git add file/directory  
-* git commit -m "info"  
 * git status  
 * git status -s  
 * git status --short
@@ -39,4 +38,31 @@ git diff 无差异
 git reset HEAD 
 git diff 有差异  
 ```
+
+* git diff --cached  
+* git diff --stated  和--cached相同  
+
+* git commit  
+* git commit --global core.editor 编辑器  
+* git commit -m "info"  
+* git commit -v 记录详细修改内容  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
