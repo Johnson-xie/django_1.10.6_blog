@@ -65,6 +65,29 @@ git rm readme.md
 git add readme
 ```
 
+* 查看提交历史  
+* git log -p  
+* git log -2  
+* git log -p -2  
+* git log --stat  查看增删改行简略信息  
+* git log --oneline  
+* git log --pretty=oneline[short, full, fuller]  
+* git log --pretty=format:"%h - %an, %ar : %s" 定制格式  
+* git log --pretty=format:"%h %s" --graph  
+```  
+-p
+--stat  
+--shortstat  
+--name-only  
+--name-status  
+--abbrev-commit 
+--relative-date  
+--graph  
+--pretty  
+```
+
+
+
 
 
 
