@@ -132,7 +132,21 @@ git add readme
 * git push不会传送标签，需要显示推送 `git push origin v1.2`  
 * git tag origin --tags 推送所有标签  
 
+* 检出标签  
+* git checkout -b new_branch_name tag_name  
 
+* git 别名  
+* git config --global alias.co checkout  
+* git config --global alias.br branch  
+* git config --global alias.ci commit  
+* git config --global alias.st status  
+* git config --global alias.unstage 'reset HEAD --'  
+```  
+git unstage fileA == git reset HEAD --fileA  
+```  
+* git config --global alias.last 'log -1 HEAD'  
+
+## 分支模型  
 
 
 
