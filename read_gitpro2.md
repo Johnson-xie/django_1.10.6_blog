@@ -46,6 +46,28 @@ git diff 有差异
 * git commit --global core.editor 编辑器  
 * git commit -m "info"  
 * git commit -v 记录详细修改内容  
+* git commit -a 跳过add,直接commit,前提是已追踪的文件修改  
+* git commit -am "info"  
+
+* 移除文件  
+* git rm file 会永久删除文件  
+* git rm -f  
+* git rm --cached file/directory 不小心添加了没有文件到暂存区，从暂存区取出不再跟踪  
+* git rm log/\*.log  
+
+* 移动文件  
+* git mv file_from file_to  改文件名  
+```  
+git mv readme.md readme  
+相当于 
+mv readme.md readme    
+git rm readme.md  
+git add readme
+```
+
+
+
+
 
 
 
