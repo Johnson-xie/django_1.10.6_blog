@@ -3,6 +3,7 @@
 ## git base  
 * git config --list  
 * git config [system global local]  
+* git config --global core.editor /d/Notepad++/notepad++.exe  
 
 * git clone  
 * git clone url custom_local_repository_name  
