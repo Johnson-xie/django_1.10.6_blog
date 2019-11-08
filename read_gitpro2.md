@@ -148,6 +148,45 @@ git unstage fileA == git reset HEAD --fileA
 * git config --global alias.last 'log -1 HEAD'  
 
 ## 分支模型  
+* git checkout -b new_branch  
+* git branch new_branch  
+* git checkout new_branch  
+
+* git merge hotbranch (current point to master)  
+* git branch -d new_branch  
+
+* 上面表示的是当前所在分支(pull和push都是合并方式的一种)  
+```  
+<<<<<<< HEAD:index.html
+hello world
+=======
+hell johnson  
+>>>>>>> iss53:index.html  
+```
+* git add file 解决冲突后标记已解决  
+* git status  
+* git commit  
+
+* git branch  
+* git branch -v 查看每一个分支的最后一次提交  
+* git branch --merged 查看合并当前分支的分支，列表中分支名字前没有	*	号的分支通常可以使用	git	branch	-d	删除掉  
+* git branch --no-merged 查看未合并到当前分支的分支  
+* git branch -D br_name  
+
+
+### 分支开发模式  
+* 长期分支  
+* 特性分支  
+* 远程分支 (远程仓库的引用指针)  
+```  
+* git ls-remote  
+* git remote show  
+* git clone -o booyah  
+origin/master 指代远端的分支  
+* git fetch origin 移动指代远端那个指针到最新  
+
+```
+
 
 
 
