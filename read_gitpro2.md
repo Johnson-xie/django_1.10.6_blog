@@ -234,6 +234,7 @@ git merge experiment
 * 推送后就不要再变基了  
 * 开发完分支后直接执行git rebase -i master，不要再pull同步代码  
 
+* git diff --check  空白错误检查  
 
 
 
