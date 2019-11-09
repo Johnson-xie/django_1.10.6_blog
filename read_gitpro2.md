@@ -236,12 +236,41 @@ git merge experiment
 
 * git diff --check  空白错误检查  
 
-* 模型为和同事开发同一个开发分支时  
+**模型为和同事开发同一个开发分支时**  
 * git fetch origin  
-* git log --no-merge cur_branch..origin/remote_branch 一般cur_branch名字和remote_branch一样  
-* git checkout remote_branch 
-* git merge cur_branch  
-* git push
+* git log --no-merge cur_branch..origin/cur_branch 一般cur_branch名字和cur_branch一样  
+* git checkout cur_branch 
+* git merge origin/cur_branch  
+* git push origin cur_branch  
+
+**开发分支与线上使用master分支的模式**  
+* 没有权限整合进master，只有提merge  
+
+```  
+1. 我开发分支featureA 推送到远端提merge  
+* git checkout -b featureA  
+* vim file.py  
+* git commit -am "add something"  
+* git push -u origin featureA  
+
+2. 等待中开发新建另一个分支任务 
+* git feach origin  
+* git checkout -b featureB origin/master  
+* vim file.py  
+* git fetch origin  
+* git merge origin/featureBee  
+* git push -u origin featureB:featureBee  该分支直接推送到有权限推送的主线服务器分支  
+
+3. 回到featureA,此刻其他已经添加修改    
+* git fetch origin  
+* git log featureA..origin/featureA 查看其他人新增的修改  
+* git checkout featureA  
+* git merge origin/featureA  
+* vim file.py  
+* git commit -am ""  
+* git push  
+```  
+
 
 
 
