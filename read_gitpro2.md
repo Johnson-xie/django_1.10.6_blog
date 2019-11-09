@@ -236,6 +236,12 @@ git merge experiment
 
 * git diff --check  空白错误检查  
 
+* 模型为和同事开发同一个开发分支时  
+* git fetch origin  
+* git log --no-merge cur_branch..origin/remote_branch 一般cur_branch名字和remote_branch一样  
+* git checkout remote_branch 
+* git merge cur_branch  
+* git push
 
 
 
