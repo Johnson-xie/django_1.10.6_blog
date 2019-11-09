@@ -186,6 +186,58 @@ origin/master 指代远端的分支
 * git fetch origin 移动指代远端那个指针到最新  
 
 ```
+* git push origin re_branch  
+* git push origin local_branch_name:remote_branch_name 远程将新建分支remote_branch_name  
+* git config --global credential.helper cache 推送保存密码在内存中，避免每次https推送输入密码  
+* git merge origin/remote_br_name 将远程分支合入本地当前分支  
+* git checkout -b remote_br_name_local origin/remote_br_name 检出远程分支到本地分支  
+* git checkout --track origin/remote_br_name 设定跟踪分支为remote_br_name  
+* git branch -u origin/remote_br_name 设定上游分支为remote_br_name  
+* git branch -vv 查看所有跟踪分支(根据本地缓存判断，可以使用下一行更新再查看)  
+* git fetch --all  
+* git pull 
+``` 
+git pull=git fetch , git merge  
+```  
+* 删除远程分支  
+* git push origin --delete remote_br_name  
+
+* 变基  
+```  
+experiment分支上做了修改，应用到最新的master上  
+git checkout experiment  
+git checkout master  
+
+git checkout master
+git merge experiment  
+```  
+
+```  
+* git rebase --onto master server client  
+* git checkout master  
+* git merge client  
+```  
+
+```  
+* git rebase master server  
+
+**以下即为master合并提交的分支，通常在远端提交操作，本地可以试验是否冲突**  
+* git checkout master  
+* git merge server  
+```  
+
+* git pull --rebase  
+* git config --global pull.rebase true 默认git pull --rebase  
+* 只在没有推送至共用仓库的提交上执行变基  
+
+* 变基与合并  
+* 推送后就不要再变基了  
+* 开发完分支后直接执行git rebase -i master，不要再pull同步代码  
+
+
+
+
+
 
 
 
