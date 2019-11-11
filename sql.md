@@ -172,6 +172,7 @@ delete from tbl_perf_scene where id in (63, 64,65,66,67);
 SET FOREIGN_KEY_CHECKS=1; 
 ```  
 
+
 ## 同一张表上子表进行关联，找出同一指标字段对应id  
 ```  
 -- 生成子表再关联查询
@@ -181,6 +182,20 @@ JOIN
 (select id, target_name from tbl_perf_target as tpt where tpt.scene_id=68 and version =25 and display=1) as t2
 on t1.target_name=t2.target_name;
 ```
+
+
+## sql批量修改不同记录  
+* 根据不同id修改对应row的priority字段的值
+```  
+UPDATE tbl_perf_scenes 
+SET priority = CASE id 
+    WHEN 1 THEN 30 
+    WHEN 2 THEN 40
+    WHEN 3 THEN 50 
+END
+WHERE id IN (1,2,3)
+```  
+
 
 
 
