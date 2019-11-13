@@ -48,3 +48,72 @@
               "order by c.p1, c.p2, r.date desc, r.commit_number desc;".format(version_dict[version], date_tuple)
 ```  
 
+## 获取一个版本下的所有场景，及版本名，并获取每个场景下的指标数  
+```  
+    result = []
+    sql = "select s.*, count(s.id) as target_count " \
+          "from " \
+              "(select tps.id, tvp.id as version_id, tps.guard_field, tps.sceneid, tps.scene_name, tps.scene_desc, " \
+              "tps.`guarder`, tps.scene_remark, tps.priority, tps.start_time, tps.end_time, tps.is_active, tps.display, " \
+              "tps.create_time, tps.update_time, tps.update_user " \
+              "from tbl_version_project as tvp " \
+              "inner join " \
+              "tbl_perf_scenes as tps " \
+              "on tvp.id=tps.version and tps.version={}) as s " \
+          "left join tbl_perf_counter as tpc on s.id=tpc.scene_id " \
+          "where s.version_id={} " \
+          "GROUP BY s.id " \
+          "order by s.priority".format(version_id, version_id)
+
+    with connection.cursor() as c:
+        c.execute(sql)
+        rows = c.fetchall()
+        for row in rows:
+            data = SceneList(*row)
+            result.append({
+                "id": data.id,
+                "version": data.version_id,
+                "field": data.field,
+                "scene_id": data.sceneid,
+                "name": data.name,
+                "desc": data.desc,
+                "owner": data.owner,
+                "remark": data.remark,
+                "priority": data.priority,
+                "start_time": data.start_time.astimezone(shanghai_zone).strftime('%Y-%m-%d %H:%M:%S') if data.start_time else "",
+                "end_time": data.end_time.astimezone(shanghai_zone).strftime('%Y-%m-%d %H:%M:%S') if data.end_time else "",
+                "status": data.status,
+                "display": data.display,
+                "create_time": data.create_time.astimezone(shanghai_zone).strftime('%Y-%m-%d %H:%M:%S') if data.create_time else "",
+                "update_time": data.update_time.astimezone(shanghai_zone).strftime('%Y-%m-%d %H:%M:%S') if data.update_time else "",
+                "update_user": data.update_user,
+                "target_count": data.count
+            })
+    return JsonResponse({"data": result})
+SceneList = namedtuple(
+    'SceneList',
+    [
+        'id',
+        'version_id',
+        'field',
+        'sceneid',
+        'name',
+        'desc',
+        'owner',
+        'remark',
+        'priority',
+        'start_time',
+        'end_time',
+        'status',
+        'display',
+        'create_time',
+        'update_time',
+        'update_user',
+        'count',
+
+    ]
+)    
+
+```  
+
+
