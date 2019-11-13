@@ -23,3 +23,11 @@ cst_tz = timezone(settings.TIME_ZONE)
 time_obj.astimezone(cst_tz) 时间对象转化为对应时区时间  
 ```  
 
+## datetime  
+* timedelta直接做时间对象的加减操作  
+```  
+from datetime import timedelta  
+t1 = datetime.now()   
+td = timedelta(hours=8)  
+t2 = t1 + td  
+```  
