@@ -31,3 +31,20 @@ t1 = datetime.now()
 td = timedelta(hours=8)  
 t2 = t1 + td  
 ```  
+
+## mysql中可以直接插入 整数为20191115类似的到时间类型的字段  
+* datetime转时间整数  
+```  
+from datetime import datetime  
+now = datetime.now()  
+now.strftime('%Y%m%d%H%M%S')  
+```  
+* sql语句  
+```  
+insert into table_name (field1, field2, create_time) values ('johnson22', 'john', 20191116104837)
+```  
+* 获取自定义值  
+```  
+select field2, concat(field1, '[复制]'), field3, 0 as field4, 0 as field5, 'time_placeholder' as create_time from table_name
+```  
+
