@@ -38,4 +38,36 @@
         return content
     except Exception as MSG:
         print('下载失败:', MSG)
-```
+```  
+
+## 上传文件报错  
+* 文件名含中文报错  
+```  
+UnicodeEncodeError: 'gbk' codec can't encode character '\xd0' in position 0: illegal multibyte sequence
+
+或UnicodeEncodeError: 'latin-1' codec can't encode characters in position 5-7: ordinal not in range(256)
+```  
+* 设置编码  
+```  
+def upload_file(filename, file_upload_obj):
+    try:
+        ftp = FTP()
+        ftp.encoding = 'UTF-8'
+        ftp.connect(FTP_SERVER, 21)
+        ftp.login(USERNAME, PASSWORD)
+
+        remotepath = FTP_PATH[FTP_PATH.find('/', 6):] + filename
+        bufsize = 1024
+        ftp.storbinary('STOR ' + remotepath, file_upload_obj, bufsize)
+        ftp.quit()
+    except Exception as MSG:
+        print('上传失败:', MSG)
+```  
+
+*  553 Could not create file  
+* 多半是根路径不对或目标文件夹不存在  
+
+
+
+
+
