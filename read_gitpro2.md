@@ -271,6 +271,15 @@ git merge experiment
 * git push  
 ```  
 
+# 对比单个文件的修改  
+
+* 查看单个文件的提交日志  
+``` git log --oneline perf_monitor/views.py```  
+* 靠后的commit号更新，查看后面的对前面的修改  
+```  
+git diff  7b94c83469a2120729ffcc17c2405626357c8bc5 833337e89fa75f8cd1f168671206b5750c5794a4 perf_monitor/views.py
+```  
+
 
 
 
