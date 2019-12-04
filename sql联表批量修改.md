@@ -28,3 +28,15 @@ alter table tbl_perf_user modify user_id INT;
 
 Alter table tbl_perf_user add constraint fk_perf_user_idx foreign key(user_id) REFERENCES tbl_user(id)
 ```  
+
+## 新增mysql table关联外键  
+```  
+CREATE TABLE `tbl_flower_dts_sms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `version_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `flower_user_idx` (`user_id`),
+  CONSTRAINT `flower_user_idx` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8
+```  
