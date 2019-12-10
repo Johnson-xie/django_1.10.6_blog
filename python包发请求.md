@@ -63,3 +63,45 @@ request = urllib.request.Request(url)
 ret = urllib.request.urlopen(request, data=textmod)
 ```  
 
+# requests 携带headers发送json数据  
+```  
+import json
+import requests
+
+data = {
+    "version_name": "xx",
+    "data": [
+        {
+            "scene_name": "xxx",
+            "target_name": "xxx",
+            "date": "2019/12/10",
+            "record_value": "1000",
+            "detail_version": "hello world",
+            "more": "johnson",
+        },
+        {
+            "scene_name": "test2",
+            "target_name": "test23",
+            "date": "xxx",
+            "record_value": "xxx",
+            "detail_version": "xxx",
+            "more": "johnson",
+        },
+        {
+            "scene_name": "test2",
+            "target_name": "test23",
+            "date": "2019/12/08",
+            "record_value": "1001",
+            "detail_version": "hello world",
+            "more": "johnson",
+        },
+    ]
+}
+
+# 开发环境数据上传的接口
+url = 'url_api'
+headers = {"Cookie": "sessionid=9qqsw1eaoe2c2iaet4t3s1j3399k9qts"}
+response = requests.post(url, data=json.dumps(data), headers=headers)
+```  
+
+
