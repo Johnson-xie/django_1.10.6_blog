@@ -280,6 +280,9 @@ git merge experiment
 git diff  7b94c83469a2120729ffcc17c2405626357c8bc5 833337e89fa75f8cd1f168671206b5750c5794a4 perf_monitor/views.py
 ```  
 
+* vim 全局替换  
+```%s/pick/fixup/g```  
+
 
 
 
