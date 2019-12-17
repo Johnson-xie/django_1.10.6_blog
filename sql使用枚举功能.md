@@ -22,3 +22,6 @@ select ifnull(date_format(tb1.time_field, '%%Y-%%m-%%d %%H:%%i:%%S'), '') as str
 from table as tb1
 ```  
 
+## timestamp时间戳好像是正确的  
+
+
