@@ -25,4 +25,5 @@ select * from table where field like "%%";
 
 ```  
 
+## select null + any结果为null  
 
