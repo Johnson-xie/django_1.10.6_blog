@@ -2,6 +2,10 @@
 * 可以，根据两个字段去重  
 ```select distinct a, b from table```  
 
+## group by  
+* 多个字段分组  
+```select * from table group by a, b```  
+
 * 报错  
 ```select distinct a, distinct b from table```  
 
