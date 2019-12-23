@@ -33,3 +33,17 @@ with connection.cursor() as c:
 数据库有一个字段为自动生成
 
 ```  
+
+## 数据库自动生成的时间已经设置，但是使用ORM插入时，没有自动生成，应该删掉模型中映射的字段  
+* 数据库字段,想要按数据库的时区生成创建时间  
+```  
+`op_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+```   
+* 定义模型  
+```  
+class OperationLog(models.Model):
+    id = models.IntegerField(primary_key=True, blank=False)
+    # op_time = models.DateTimeField(auto_now_add=True)
+```  
+
+
