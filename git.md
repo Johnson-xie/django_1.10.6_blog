@@ -158,5 +158,7 @@ git rebase --continue
 5. 在新分支里拷贝进复制出的文件  
 6. 提交代码，推送， 提merge  
 
+## git 查看单个文件历史差异  
+```git diff 更早的hash_id 更晚的hash_id file_path.py```  
 
 
