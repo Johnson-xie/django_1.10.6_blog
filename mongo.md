@@ -17,3 +17,8 @@ print(cursor.count())
 for item in cursor:
     pprint(item)
 ```
+
+## like查询  
+```  
+db.getCollection('table_name').find({'field':'value', 'project':/hello world/}).sort({'start_time': -1})
+```  
