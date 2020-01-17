@@ -11,3 +11,16 @@
     data = []
     PerfTarget.objects.raw(sql_target, (reference, version, version_dict[version], scene_tuple)):
 ```  
+
+# 查询字符串入参in 不受语法限制(一个元素的情况)  
+```  
+select 
+    * 
+from 
+    tbl
+where
+    date in %s
+    
+c.execute(sql, (date_tuple,))
+```  
+
